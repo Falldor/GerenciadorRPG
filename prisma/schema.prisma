@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource dataBasePrismaRPG {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum tipoHabilidade {
+  mental
+  fisico
+}
+
+model Mestre {
+  id      String @id @unique @default(uuid())
+  usuario String
+  senha   String
+  mesa    Mesa[]
+
+  @@map("mestre")
+}
+
+model Mesa {
+  id        String    @id @default(uuid())
+  Mestre    Mestre?   @relation(fields: [mestreId], references: [id])
+  mestreId  String?
+  jogadores jogador[]
+  monstros  monstro[]
+
+  @@map("mesa")
+}
+
+model jogador {
+  id          String       @id @unique @default(uuid())
+  Mesa        Mesa?        @relation(fields: [mesaId], references: [id])
+  mesaId      String?
+  usuario     String
+  senha       String
+  personagens personagem[]
+}
+
+model personagem {
+  id          String       @id @unique @default(uuid())
+  Jogador     jogador?     @relation(fields: [jogadorId], references: [id])
+  jogadorId   String?
+  nome        String
+  nivelFisico Int
+  nivelMental Int
+  xp          Int
+  vida        Int
+  estresse    Int
+  historia    String
+  habilidades habilidade[]
+}
+
+model monstro {
+  id          String       @id @unique @default(uuid())
+  Mesa        Mesa?        @relation(fields: [mesaId], references: [id])
+  mesaId      String?
+  nome        String
+  nivelFisico Int
+  nivelMental Int
+  xp          Int
+  vida        Int
+  estresse    Int
+  historia    Int
+  habilidades habilidade[]
+}
+
+model habilidade {
+  id           String         @id @unique @default(uuid())
+  personagem   personagem?    @relation(fields: [personagemId], references: [id])
+  personagemId String?
+  monstro      monstro?       @relation(fields: [monstroId], references: [id])
+  monstroId    String?
+  nome         String
+  descricao    String
+  tipo         tipoHabilidade
+}

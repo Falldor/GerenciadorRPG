@@ -9,3 +9,7 @@ Criar/editar/deletar/procurar jogadores(ras), Criar/editar/deletar/procurar pers
 Criar/editar/deletar/procurar habilidades ao jogador(a), personagens e inimigos.
 Mexer nos atributos dos jogadores(ras), personagens e inimigos como por exemplo a vida, ou a experiencia.
 Ordenar os jogadores, personagens e inimigos durantes os combates, assim mostrando quem vai agir primeiro, segundo e etc
+
+## Rotas que vem ai
+
+todas as rotas de cruds para todas as novas entidades

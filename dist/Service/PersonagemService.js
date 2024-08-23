@@ -9,45 +9,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MonstroRepository = void 0;
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
-class MonstroRepository {
-    create(nome, historia) {
+exports.PersonagemService = void 0;
+const PersonagemRepository_1 = require("../Repository/PersonagemRepository");
+const personagemRepository = new PersonagemRepository_1.PersonagemRepository();
+class PersonagemService {
+    create(JogadorId, body) {
         return __awaiter(this, void 0, void 0, function* () {
-            const novoPersonagem = prisma.monstro.create({
-                data: {
-                    nome,
-                    nivelFisico: 1,
-                    nivelMental: 1,
-                    xp: 10,
-                    vida: 8,
-                    estresse: 8,
-                    historia
-                }
-            });
-            return novoPersonagem;
+            const { nome, historia } = body;
+            const personagem = personagemRepository.create(JogadorId, nome, historia);
+            return personagem;
         });
     }
-    getAll() {
+    getAll(JogadorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.findMany();
+            return personagemRepository.getAll(JogadorId);
         });
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.findUnique({ where: { id } });
+            return personagemRepository.getById(id);
         });
     }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.update({ where: { id }, data });
+            return personagemRepository.update(id, data);
         });
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.delete({ where: { id } });
+            personagemRepository.delete(id);
         });
     }
 }
-exports.MonstroRepository = MonstroRepository;
+exports.PersonagemService = PersonagemService;

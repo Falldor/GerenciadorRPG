@@ -1,5 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const PersonagemController_1 = require("../Controllers/PersonagemController");
 const router = (0, express_1.Router)();
+const personagemController = new PersonagemController_1.PersonagemController();
+router.post('/create/:jogadorId', personagemController.create);
+router.get('/getAll/:jogadorId', personagemController.getAll);
+router.get('/getById/:id', personagemController.getById);
+router.put('/edit/:id', personagemController.update);
+router.delete('/delete/:id', personagemController.delete);
 exports.default = router;

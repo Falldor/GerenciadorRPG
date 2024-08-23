@@ -10,29 +10,77 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MonstroController = void 0;
-const client_1 = require("@prisma/client");
+const MonstroService_1 = require("../Service/MonstroService");
+const monstroService = new MonstroService_1.MonstroService();
 class MonstroController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const prisma = new client_1.PrismaClient();
-                const { nome, nivelFisico, nivelMental, vida, estresse, historia } = req.body;
-                const monstro = yield prisma.personagem.create({
-                    data: {
-                        nome,
-                        nivelFisico,
-                        nivelMental,
-                        xp: 10,
-                        vida,
-                        estresse,
-                        historia
-                    }
-                });
-                return res.status(201).json({ resource: monstro });
+                return res.status(201).json({ message: "Monstro criada com sucesso", resource: yield monstroService.create(req.body) });
+            }
+            catch (error) {
+                return res.status(500).json({ error: error });
+            }
+        });
+    }
+    getAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const monstros = yield monstroService.getAll();
+                if (monstros.length > 0) {
+                    return res.status(200).json({ message: "Lista de personagens criados:", resource: monstros });
+                }
+                else {
+                    return res.status(200).json({ message: "nenhum monstro foi criado", resource: monstros });
+                }
             }
             catch (error) {
                 console.log(error);
-                return res.status(500).json({ resource: error });
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    getById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const monstro = yield monstroService.getById(req.params.id);
+                if (monstro) {
+                    return res.status(200).json({ message: "Monstros:", resource: monstro });
+                }
+                else {
+                    return res.status(200).json({ message: "Nenhum monstro foi cadastrado com o id " + req.params.id });
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id } = req.params;
+                const novoMonstro = yield monstroService.update(id, req.body);
+                if (novoMonstro) {
+                    return res.status(200).json({ message: "Monstro:", resource: novoMonstro });
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield monstroService.delete(req.params.id);
+                res.status(204).json({ message: "Deletado com sucesso" });
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
             }
         });
     }

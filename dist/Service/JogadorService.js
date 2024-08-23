@@ -9,45 +9,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MonstroRepository = void 0;
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
-class MonstroRepository {
-    create(nome, historia) {
+exports.JogadorService = void 0;
+const JogadorRepository_1 = require("../Repository/JogadorRepository");
+const jogadorRepository = new JogadorRepository_1.JogadorRepository();
+class JogadorService {
+    create(body) {
         return __awaiter(this, void 0, void 0, function* () {
-            const novoPersonagem = prisma.monstro.create({
-                data: {
-                    nome,
-                    nivelFisico: 1,
-                    nivelMental: 1,
-                    xp: 10,
-                    vida: 8,
-                    estresse: 8,
-                    historia
-                }
-            });
-            return novoPersonagem;
+            const { usuario, senha } = body;
+            const jogador = jogadorRepository.create(usuario, senha);
+            return jogador;
         });
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.findMany();
+            return jogadorRepository.getAll();
         });
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.findUnique({ where: { id } });
+            return jogadorRepository.getById(id);
         });
     }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.update({ where: { id }, data });
+            return jogadorRepository.update(id, data);
         });
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.delete({ where: { id } });
+            jogadorRepository.delete(id);
         });
     }
 }
-exports.MonstroRepository = MonstroRepository;
+exports.JogadorService = JogadorService;

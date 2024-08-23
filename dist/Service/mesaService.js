@@ -9,45 +9,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MonstroRepository = void 0;
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
-class MonstroRepository {
-    create(nome, historia) {
+exports.MesaService = void 0;
+const MesaRepository_1 = require("../Repository/MesaRepository");
+const mesaRepository = new MesaRepository_1.MesaRepository();
+class MesaService {
+    create(body) {
         return __awaiter(this, void 0, void 0, function* () {
-            const novoPersonagem = prisma.monstro.create({
-                data: {
-                    nome,
-                    nivelFisico: 1,
-                    nivelMental: 1,
-                    xp: 10,
-                    vida: 8,
-                    estresse: 8,
-                    historia
-                }
-            });
-            return novoPersonagem;
+            const { mestreId } = body;
+            const mesa = mesaRepository.create(mestreId);
+            return mesa;
         });
     }
-    getAll() {
+    getAll(mestreId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.findMany();
+            return mesaRepository.getAll(mestreId);
         });
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.findUnique({ where: { id } });
+            return mesaRepository.getById(id);
         });
     }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.update({ where: { id }, data });
+            return mesaRepository.update(id, data);
         });
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.monstro.delete({ where: { id } });
+            mesaRepository.delete(id);
         });
     }
 }
-exports.MonstroRepository = MonstroRepository;
+exports.MesaService = MesaService;

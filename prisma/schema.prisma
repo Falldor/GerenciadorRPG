@@ -82,7 +82,7 @@ model monstro {
   xp          Int
   vida        Int
   estresse    Int
-  historia    Int
+  historia    String
   habilidades monstroHabilidade[]
 
   @@map("monstro")

@@ -10,29 +10,77 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PersonagemController = void 0;
-const client_1 = require("@prisma/client");
+const PersonagemService_1 = require("../Service/PersonagemService");
+const personagemService = new PersonagemService_1.PersonagemService();
 class PersonagemController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const prisma = new client_1.PrismaClient();
-                const { nome, historia } = req.body;
-                const personagem = yield prisma.personagem.create({
-                    data: {
-                        nome,
-                        nivelFisico: 1,
-                        nivelMental: 1,
-                        xp: 10,
-                        vida: 8,
-                        estresse: 8,
-                        historia
-                    }
-                });
-                return res.status(201).json({ resource: personagem });
+                return res.status(201).json({ message: "Personagem criada com sucesso", resource: yield personagemService.create(req.params.jogadorId, req.body) });
+            }
+            catch (error) {
+                return res.status(500).json({ error: error });
+            }
+        });
+    }
+    getAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const personagens = yield personagemService.getAll(req.params.jogadorId);
+                if (personagens.length > 0) {
+                    return res.status(200).json({ message: "Lista de personagens criados:", resource: personagens });
+                }
+                else {
+                    return res.status(200).json({ message: "nenhum personagem foi criado", resource: personagens });
+                }
             }
             catch (error) {
                 console.log(error);
-                return res.status(500).json({ resource: error });
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    getById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const personagem = yield personagemService.getById(req.params.id);
+                if (personagem) {
+                    return res.status(200).json({ message: "Personagem:", resource: personagem });
+                }
+                else {
+                    return res.status(200).json({ message: "Nenhum personagem foi cadastrado com o id " + req.params.id });
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { id } = req.params;
+                const novoPersonagem = yield personagemService.update(id, req.body);
+                if (novoPersonagem) {
+                    return res.status(200).json({ message: "Personagem:", resource: novoPersonagem });
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield personagemService.delete(req.params.id);
+                res.status(204).json({ message: "Deletado com sucesso" });
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
             }
         });
     }

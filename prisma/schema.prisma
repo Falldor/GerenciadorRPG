@@ -8,7 +8,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource dataBasePrismaRPG {
+datasource rpg_DB {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
@@ -28,27 +28,38 @@ model Mestre {
 }
 
 model Mesa {
-  id        String    @id @default(uuid())
-  Mestre    Mestre?   @relation(fields: [mestreId], references: [id])
+  id        String          @id @default(uuid())
+  Mestre    Mestre?         @relation(fields: [mestreId], references: [id])
   mestreId  String?
-  jogadores jogador[]
-  monstros  monstro[]
+  jogadores JogadoresMesa[]
+  monstros  MonstroMesa[]
 
   @@map("mesa")
 }
 
 model jogador {
-  id          String       @id @unique @default(uuid())
-  Mesa        Mesa?        @relation(fields: [mesaId], references: [id])
-  mesaId      String?
+  id          String          @id @unique @default(uuid())
+  Mesa        JogadoresMesa[]
   usuario     String
   senha       String
   personagens personagem[]
+
+  @@map("jogador")
+}
+
+model JogadoresMesa {
+  jogadorId String  @map("jogadorId")
+  mesaId    String  @map("MesaId")
+  jogador   jogador @relation(fields: [jogadorId], references: [id])
+  mesa      Mesa    @relation(fields: [mesaId], references: [id])
+
+  @@id([jogadorId, mesaId])
+  @@map("jogadores_mesa")
 }
 
 model personagem {
-  id          String       @id @unique @default(uuid())
-  Jogador     jogador?     @relation(fields: [jogadorId], references: [id])
+  id          String                 @id @unique @default(uuid())
+  Jogador     jogador?               @relation(fields: [jogadorId], references: [id])
   jogadorId   String?
   nome        String
   nivelFisico Int
@@ -57,13 +68,14 @@ model personagem {
   vida        Int
   estresse    Int
   historia    String
-  habilidades habilidade[]
+  habilidades personagemHabilidade[]
+
+  @@map("personagem")
 }
 
 model monstro {
-  id          String       @id @unique @default(uuid())
-  Mesa        Mesa?        @relation(fields: [mesaId], references: [id])
-  mesaId      String?
+  id          String              @id @unique @default(uuid())
+  Mesas       MonstroMesa[]
   nome        String
   nivelFisico Int
   nivelMental Int
@@ -71,16 +83,47 @@ model monstro {
   vida        Int
   estresse    Int
   historia    Int
-  habilidades habilidade[]
+  habilidades monstroHabilidade[]
+
+  @@map("monstro")
+}
+
+model MonstroMesa {
+  monstroId String  @map("monstroId")
+  mesaId    String  @map("mesaId")
+  monstro   monstro @relation(fields: [monstroId], references: [id])
+  mesa      Mesa    @relation(fields: [mesaId], references: [id])
+
+  @@id([monstroId, mesaId])
+  @@map("monstro_mesa")
 }
 
 model habilidade {
-  id           String         @id @unique @default(uuid())
-  personagem   personagem?    @relation(fields: [personagemId], references: [id])
-  personagemId String?
-  monstro      monstro?       @relation(fields: [monstroId], references: [id])
+  id           String                 @id @unique @default(uuid())
+  personagem   personagemHabilidade[]
+  monstro      monstroHabilidade[]
   monstroId    String?
   nome         String
   descricao    String
   tipo         tipoHabilidade
+}
+
+model personagemHabilidade {
+  personagem_id String     @map("personagem_id")
+  habilidade_id String     @map("habilidade_id")
+  personagem    personagem @relation(fields: [personagem_id], references: [id])
+  habilidade    habilidade @relation(fields: [habilidade_id], references: [id])
+
+  @@id([personagem_id, habilidade_id])
+  @@map("personagem_habilidade")
+}
+
+model monstroHabilidade {
+  habilidade_id String     @map("habilidade_id")
+  monstro_id    String     @map("monstro_id")
+  monstro       monstro    @relation(fields: [monstro_id], references: [id])
+  habilidade    habilidade @relation(fields: [habilidade_id], references: [id])
+
+  @@id([habilidade_id, monstro_id])
+  @@map("monstro_habilidade")
 }

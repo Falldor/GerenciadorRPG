@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { MesaController } from "../Controllers/mesaController";
+import { MesaController } from "../Controllers/MesaController";
 
 
 

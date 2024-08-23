@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { MonstroController } from "../Controllers/monstroController";
+import { MonstroController } from "../Controllers/MonstroController";
+
 
 
 

@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { HabilidadeController } from "../Controllers/habilidade.Controller";
+import { HabilidadeController } from "../Controllers/HabilidadeController";
+
 
 
 const router = Router();

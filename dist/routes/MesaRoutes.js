@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const MesaController_1 = require("../Controllers/MesaController");
+const router = (0, express_1.Router)();
+const mesaController = new MesaController_1.MesaController();
+exports.default = router;

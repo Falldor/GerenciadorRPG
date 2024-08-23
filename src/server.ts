@@ -1,4 +1,4 @@
-import express , {Request, Response} from 'express';
+import express from 'express';
 import mestreRoutes from './routes/MestreRoutes'
 
 
@@ -8,13 +8,6 @@ const port = 3000;
 app.use(express.json())
 
 app.use('/mestre', mestreRoutes)
-
-
-
-
-
-
-
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

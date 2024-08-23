@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.jogadorController = void 0;
+exports.JogadorController = void 0;
 const client_1 = require("@prisma/client");
-class jogadorController {
+class JogadorController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -32,4 +32,4 @@ class jogadorController {
         });
     }
 }
-exports.jogadorController = jogadorController;
+exports.JogadorController = JogadorController;

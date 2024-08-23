@@ -9,26 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PersonagemController = void 0;
+exports.HabilidadeController = void 0;
 const client_1 = require("@prisma/client");
-class PersonagemController {
+class HabilidadeController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const prisma = new client_1.PrismaClient();
-                const { nome, historia } = req.body;
-                const personagem = yield prisma.personagem.create({
+                const { nome, descricao, tipo } = req.body;
+                const habilidade = yield prisma.habilidade.create({
                     data: {
                         nome,
-                        nivelFisico: 1,
-                        nivelMental: 1,
-                        xp: 10,
-                        vida: 8,
-                        estresse: 8,
-                        historia
+                        descricao,
+                        tipo
                     }
                 });
-                return res.status(201).json({ resource: personagem });
+                return res.status(201).json({ resource: habilidade });
             }
             catch (error) {
                 console.log(error);
@@ -37,4 +33,4 @@ class PersonagemController {
         });
     }
 }
-exports.PersonagemController = PersonagemController;
+exports.HabilidadeController = HabilidadeController;

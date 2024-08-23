@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 
-export class monstroController{
+export class MonstroController{
 
     async create(req:Request, res:Response){
         try {

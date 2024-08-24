@@ -1,21 +1,31 @@
 import { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
-import { HabilidadeService} from '../Service/HabilidadeService'
+import { NaMesaService} from '../Service/NaMesaService'
 
-const hablidadeService = new HabilidadeService()
+const naMesaService = new NaMesaService()
 
-export class HabilidadeController{
+export class NaMesaController{
 
-    async create(req: Request, res: Response) {
+    async addJogador(req: Request, res: Response) {
         try {
-            return res.status(201).json({ message: "habilidade criada com sucesso", resource: await hablidadeService.create(req.body) })
+            return res.status(201).json({ message: "Jogador(a) adcionado com sucesso na mesa", 
+                resource: await naMesaService.addJogador(req.body) })
         } catch (error) {
             return res.status(500).json({ error: error })
         }
 
     }
 
-    async getAll(req: Request, res: Response) {
+    async addMonstro(req: Request, res: Response) {
+        try {
+            return res.status(201).json({ message: "Monstro adcionado com sucesso na mesa", 
+                resource: await naMesaService.addMonstro(req.body) })
+        } catch (error) {
+            return res.status(500).json({ error: error })
+        }
+
+    }
+    /*async getAll(req: Request, res: Response) {
         try {
             const Hablidades = await hablidadeService.getAll()
             if (Hablidades.length > 0) {
@@ -65,5 +75,5 @@ export class HabilidadeController{
             console.log(error)
             res.status(500).json({ resource: error })
         }
-    }
+    }*/
 }

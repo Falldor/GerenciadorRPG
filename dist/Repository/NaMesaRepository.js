@@ -9,41 +9,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HabilidadeRepository = void 0;
+exports.NaMesaRepository = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-class HabilidadeRepository {
-    create(nome, descricao, tipo) {
+class NaMesaRepository {
+    addJogador(mesaId, jogadorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const novoPersonagem = prisma.habilidade.create({
+            const novoJogador = prisma.jogadoresMesa.create({
                 data: {
-                    nome,
-                    descricao,
-                    tipo
+                    mesaId,
+                    jogadorId
                 }
             });
-            return novoPersonagem;
+            return novoJogador;
         });
     }
-    getAll() {
+    addMonstro(mesaId, monstroId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.findMany();
-        });
-    }
-    getById(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.findUnique({ where: { id } });
-        });
-    }
-    update(id, data) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.update({ where: { id }, data });
-        });
-    }
-    delete(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.delete({ where: { id } });
+            const novoMonstro = prisma.monstroMesa.create({
+                data: {
+                    mesaId,
+                    monstroId
+                }
+            });
+            return novoMonstro;
         });
     }
 }
-exports.HabilidadeRepository = HabilidadeRepository;
+exports.NaMesaRepository = NaMesaRepository;

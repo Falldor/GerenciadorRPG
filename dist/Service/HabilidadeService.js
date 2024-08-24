@@ -9,41 +9,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HabilidadeRepository = void 0;
-const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient();
-class HabilidadeRepository {
-    create(nome, descricao, tipo) {
+exports.HabilidadeService = void 0;
+const HabilidadeRepository_1 = require("../Repository/HabilidadeRepository");
+const habilidadeRepository = new HabilidadeRepository_1.HabilidadeRepository();
+class HabilidadeService {
+    create(body) {
         return __awaiter(this, void 0, void 0, function* () {
-            const novoPersonagem = prisma.habilidade.create({
-                data: {
-                    nome,
-                    descricao,
-                    tipo
-                }
-            });
-            return novoPersonagem;
+            const { nome, descricao, tipo } = body;
+            const habilidade = habilidadeRepository.create(nome, descricao, tipo);
+            return habilidade;
         });
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.findMany();
+            return habilidadeRepository.getAll();
         });
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.findUnique({ where: { id } });
+            return habilidadeRepository.getById(id);
         });
     }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.update({ where: { id }, data });
+            return habilidadeRepository.update(id, data);
         });
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield prisma.habilidade.delete({ where: { id } });
+            habilidadeRepository.delete(id);
         });
     }
 }
-exports.HabilidadeRepository = HabilidadeRepository;
+exports.HabilidadeService = HabilidadeService;

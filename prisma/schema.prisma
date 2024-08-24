@@ -102,7 +102,6 @@ model habilidade {
   id           String                 @id @unique @default(uuid())
   personagem   personagemHabilidade[]
   monstro      monstroHabilidade[]
-  monstroId    String?
   nome         String
   descricao    String
   tipo         tipoHabilidade

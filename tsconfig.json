@@ -8,11 +8,12 @@
         "outDir": "./dist"
     },
     "include": [
-        "./**/*.ts"
+        "./**/*.ts",
+        "**/*.spec.ts"
     ],
     "exclude": [
         "dist",
         "node_modules",
-        "**/*.spec.ts"
+        
     ]
 }

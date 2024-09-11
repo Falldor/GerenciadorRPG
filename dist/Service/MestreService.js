@@ -40,5 +40,15 @@ class MestreService {
             mestreRepository.delete(id);
         });
     }
+    login(id, usuario, senha) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const mestre = yield this.getById(id);
+            if ((mestre === null || mestre === void 0 ? void 0 : mestre.senha) == senha && mestre.usuario == usuario) {
+                return true;
+            }
+            else
+                return false;
+        });
+    }
 }
 exports.MestreService = MestreService;

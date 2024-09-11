@@ -27,5 +27,14 @@ export class MestreService {
     async delete(id:string): Promise<void>{
         mestreRepository.delete(id);
     }
+
+    async login(id:string, usuario: string, senha:string){
+        const mestre = await this.getById(id)
+        if(mestre?.senha == senha && mestre.usuario == usuario){
+            
+            return true
+        }
+        else return false
+    }
     
 }

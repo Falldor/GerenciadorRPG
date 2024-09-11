@@ -1,7 +1,9 @@
 import { Request, Response } from 'express'
 import { MestreService } from '../Service/MestreService'
+import { JWTService } from '../Service/JWTService';
 
 const mestreService = new MestreService();
+const jwtService = new JWTService()
 
 
 export class MestreController {
@@ -63,6 +65,25 @@ export class MestreController {
             
             await mestreService.delete(req.params.id)
             res.status(204).json({message:"Deletado com sucesso"})
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({resource:error})
+        }
+    }
+
+    async login(req: Request, res: Response){
+        try {
+            const {id, usuario, senha} = req.body
+            if(await mestreService.login(id, usuario, senha)){
+                const token = jwtService.signIn(id)
+                token.then(valor => {
+                    if(valor == "chave_não_encontrada"){
+                        res.status(500).json()
+                    }else{
+                        res.status(200).json({valor})
+                    }
+                })
+            }else{res.status(500).json()}
         } catch (error) {
             console.log(error)
             res.status(500).json({resource:error})

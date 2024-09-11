@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const JogadorController_1 = require("../Controllers/JogadorController");
+const autenticacao_1 = require("../shared/middleware/autenticacao");
 const router = (0, express_1.Router)();
 const jogadorController = new JogadorController_1.JogadorController();
 router.post('/register/', jogadorController.create);
-router.get('/getAll/', jogadorController.getAll);
-router.get('/getById/:id', jogadorController.getById);
-router.put('/edit/:id', jogadorController.update);
-router.delete('/delete/:id', jogadorController.delete);
+router.get('/getAll/', autenticacao_1.authenticateTokenMiddleware, jogadorController.getAll);
+router.get('/getById/:id', autenticacao_1.authenticateTokenMiddleware, jogadorController.getById);
+router.put('/edit/:id', autenticacao_1.authenticateTokenMiddleware, jogadorController.update);
+router.delete('/delete/:id', autenticacao_1.authenticateTokenMiddleware, jogadorController.delete);
 exports.default = router;

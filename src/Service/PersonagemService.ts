@@ -25,7 +25,7 @@ export class PersonagemService {
     }
 
     async delete(id:string): Promise<void>{
-        personagemRepository.delete(id);
+        await personagemRepository.delete(id);
     }
     
 }

@@ -25,7 +25,7 @@ export class MestreService {
     }
 
     async delete(id:string): Promise<void>{
-        mestreRepository.delete(id);
+        await mestreRepository.delete(id);
     }
 
     async login(id:string, usuario: string, senha:string){

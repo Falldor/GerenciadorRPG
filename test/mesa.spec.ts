@@ -1,42 +1,31 @@
 import { Mestre } from "@prisma/client";
 import { MestreService } from "../src/Service/MestreService";
 import { MesaService } from "../src/Service/MesaService";
-import chai = require("chai");
 
 const mesaService = new MesaService()
 const mestreService = new MestreService()
 
 
 describe("testes mestre", () => {
-    let mestre:Promise<Mestre>
-    before(async () =>{
-        mestre = mestreService.create({usario:"fabio.almendro", senha:"123"})
+    let mestre : Mestre
+    beforeAll(async () =>{
+        mestre = await mestreService.create({usuario:"fabio.almendro", senha:"123"})
     })
-    it('cria mesa com sucesso', () => {
-        mestre.then(mestre => {
-            mesaService.create(mestre.id)
-            const mesa = mesaService.getAll(mestre.id)
-            chai.expect(mesa).to.have.lengthOf(1)
-        })
+    it('cria mesa com sucesso', async () => {
+        await mesaService.create(mestre.id)
+        const mesa = await mesaService.getAll(mestre.id)
+        expect(mesa).not.toBeNull()
         
     });
 
-    it('Pega mesa com sucesso', () => {
-        mestre.then(mestre => {
-            const mesa = mesaService.getAll(mestre.id)
-            chai.expect(mesa).to.have.lengthOf(1)
-        })
+    it('Pega mesa com sucesso', async () => {
+        const mesa = await mesaService.getAll(mestre.id)
+        expect(mesa).not.toEqual([])
     })
 
-    it('Deleta mesa com sucesso', () => {
-        mestre.then(mestre => {
-            const mesa = mesaService.create(mestre.id)
-            mesa.then(mesa => {
-            mesaService.delete(mesa.id)
-            const mesas = mesaService.getById(mesa.id)
-            chai.expect(mesas).to.have.lengthOf(0)
-        })
-        })
-        
+    it('Deleta mesa com sucesso', async () => {
+        const mesa = await mesaService.create(mestre.id)
+        await mesaService.delete(mesa.id)
+        expect(await mesaService.getById(mesa.id)).toBeNull()     
     })
 })

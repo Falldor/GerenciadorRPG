@@ -25,7 +25,7 @@ export class JogadorService {
     }
 
     async delete(id:string): Promise<void>{
-        jogadorRepository.delete(id);
+        await jogadorRepository.delete(id);
     }
     
 }

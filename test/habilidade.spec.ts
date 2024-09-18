@@ -1,44 +1,32 @@
 import { HabilidadeService } from "../src/Service/HabilidadeService";
-import chai = require("chai");
+import { tipoHabilidade } from "@prisma/client";
 
 const habilidadeService = new HabilidadeService()
 
-
-
 describe("testes habilidade", () => {
-    it('cria habilidade com sucesso', () => {
-        const habilidade = habilidadeService.create({nome: "programar", descricao:"sabe programar", tipo: "mental"})
-        habilidade.then(infos => {
-            const habilidade = habilidadeService.getById(infos.id)
-            chai.expect(habilidade).to.have.lengthOf(1)
-        })
-
-
-    });
-
+    it('cria habilidade com sucesso', async() => {
+      const habilidade = habilidadeService.create({ nome: "programar", descricao: "sabe programar", tipo: tipoHabilidade.mental })
+      habilidade.then(async infos => {
+        const habilidade = await habilidadeService.getById(infos.id)
+        expect(habilidade).not.toBeNull()
+      })
+    })
     it('Pega habilidade com sucesso', () => {
-        const habilidade = habilidadeService.getAll()
-        chai.expect(habilidade).to.have.lengthOf(1)
+      const habilidade = habilidadeService.getAll()
+      expect(habilidade).not.toEqual([])      
     })
 
-    it('atualiza habilidade com sucesso', () => {
-        const habilidade = habilidadeService.create({ nome: "scoar", descricao:"sabe socar", tipo: "fisica" })
-        habilidade.then(infos => {
-            const antigo = habilidadeService.getById(infos.id)
-            habilidadeService.update(infos.id, { nome: "socar" })
-            const novo = habilidadeService.getById(infos.id)
-            chai.expect(antigo).to.not.equal(novo)
-        })
-
-
+    it('atualiza habilidade com sucesso',async () => {
+      const habilidade = await habilidadeService.create({ nome: "scoar", descricao: "sabe socar", tipo: tipoHabilidade.fisico })
+      const antigo = await habilidadeService.getById(habilidade.id)
+      await habilidadeService.update(habilidade.id, { nome: "socar" })
+      const novo = await habilidadeService.getById(habilidade.id)
+      expect(antigo?.nome).not.toEqual(novo?.nome)
     })
 
-    it('Deleta habilidade com sucesso', () => {
-        const habilidade = habilidadeService.create({ nome: "imortalidade", descricao:"vira imortal", tipo: "mental"  })
-        habilidade.then(infos => {
-            habilidadeService.delete(infos.id)
-            const habilidade = habilidadeService.getById(infos.id)
-            chai.expect(habilidade).to.have.lengthOf(0)
-        })
+    it('Deleta habilidade com sucesso', async () => {
+      const habilidade = await habilidadeService.create({ nome: "imortalidade", descricao: "vira imortal", tipo: tipoHabilidade.mental })
+      await habilidadeService.delete(habilidade.id)
+      expect(await habilidadeService.getById(habilidade.id)).toBeNull()
     })
-})
+});

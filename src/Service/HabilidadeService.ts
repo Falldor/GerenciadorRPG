@@ -25,7 +25,7 @@ export class HabilidadeService {
     }
 
     async delete(id:string): Promise<void>{
-        habilidadeRepository.delete(id);
+        await habilidadeRepository.delete(id);
     }
     
 }

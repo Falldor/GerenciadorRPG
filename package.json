@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha -r ts-node/register 'test/**/*.ts'",
+    "test": "jest",
     "start": "node dist/server.js",
     "build": "gulp build",
     "dev": "gulp dev"
@@ -18,14 +18,12 @@
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.19",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.13",
     "@types/jsonwebtoken": "^9.0.6",
-    "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.11",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
-    "chai": "^5.1.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -33,10 +31,20 @@
     "gulp-nodemon": "^2.5.0",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "mocha": "^10.7.3",
+    "jest": "^29.7.0",
     "prettier": "^3.3.3",
     "prisma": "^5.17.0",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.6.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleFileExtensions": ["ts", "js", "json", "node"],
+    "testMatch": ["**/?(*.)+(spec|test).ts?(x)"]
   }
 }

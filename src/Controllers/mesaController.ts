@@ -8,7 +8,7 @@ export class MesaController{
 
     async create(req: Request, res: Response) {
         try {
-            return res.status(201).json({message:"mesa criada com sucesso", resource: await mesaService.create(req.body)})
+            return res.status(201).json({message:"mesa criada com sucesso", resource: await mesaService.create(req.body.mestreId)})
         } catch (error) {
            return res.status(500).json({error:error})
         }

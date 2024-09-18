@@ -7,12 +7,10 @@
         "skipLibCheck": true,
         "outDir": "./dist"
     },
-    "include": [
-        "./**/*.ts",
-        "**/*.spec.ts"
-    ],
+    "include": ["src/**/*.ts"],
     "exclude": [
         "dist",
+        "test/**/*.spec.ts",
         "node_modules",
         
     ]

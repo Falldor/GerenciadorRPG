@@ -25,7 +25,7 @@ export class MonstroService {
     }
 
     async delete(id:string): Promise<void>{
-        monstroRepository.delete(id);
+       await monstroRepository.delete(id);
     }
     
 }

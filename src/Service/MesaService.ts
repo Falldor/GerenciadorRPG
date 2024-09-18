@@ -6,8 +6,7 @@ const mesaRepository = new MesaRepository()
 
 export class MesaService {
 
-    async create(body: any): Promise<Mesa> {
-        const { mestreId } = body;
+    async create(mestreId: string): Promise<Mesa> {
         const mesa = mesaRepository.create(mestreId);
         return mesa;
     }
@@ -25,7 +24,7 @@ export class MesaService {
     }
 
     async delete(id:string): Promise<void>{
-        mesaRepository.delete(id);
+       await mesaRepository.delete(id);
     }
     
 }

@@ -1,56 +1,43 @@
 import { jogador } from "@prisma/client";
 import { JogadorService } from "../src/Service/JogadorService";
 import { PersonagemService } from "../src/Service/PersonagemService";
-import chai = require("chai");
+
 
 const personagemService = new PersonagemService()
 const jogadorService = new JogadorService()
 
 
 describe("testes jogador", () => {
-    let jogador:Promise<jogador>
-    before(async () =>{
-        jogador = jogadorService.create({usario:"fabio.almendro", senha:"123"})
+    let jogador:jogador
+    beforeAll(async () =>{
+        jogador = await jogadorService.create({usuario:"fabio.almendro", senha:"123"})
     })
-    it('cria personagem com sucesso', () => {
-        jogador.then(jogador => {
-            personagemService.create(jogador.id,{nome:"pietro", hisotira:"ele é um assassino"})
-            const personagem = personagemService.getAll(jogador.id)
-            chai.expect(personagem).to.have.lengthOf(1)
-        })
+    it('cria personagem com sucesso', async () => {
+        const personagem = await personagemService.create(jogador.id,{nome:"pietro", historia:"ele é um assassino"})
+        expect(await personagemService.getById(personagem.id)).not.toBeNull()
         
     });
 
-    it('Pega personagem com sucesso', () => {
-        jogador.then(jogador => {
-            const personagem = personagemService.getAll(jogador.id)
-            chai.expect(personagem).to.have.lengthOf(1)
-        })
+    it('Pega personagem com sucesso', async () => {
+        const personagem = await personagemService.getAll(jogador.id)
+        expect(personagem).not.toEqual([])
     })
 
-    it('atualiza personagem com sucesso', () => {
-        jogador.then(jogador => {
-            const personagem = personagemService.create(jogador.id,{nome:"Tio lu", hisotira:"brigou com seu pai"})
-            personagem.then(personagem => {
-            const personagemAntigo = personagemService.getById(personagem.id) 
-            personagemService.update(personagem.id, {historia: "ele é fã da xuxa"})
-            const personagemNovo = personagemService.getById(personagem.id) 
-            chai.expect(personagemNovo).to.not.equal(personagemAntigo)
-        })
-        })
+    it('atualiza personagem com sucesso',async () => {
+        const personagem = await personagemService.create(jogador.id,{nome:"Tio lu", historia:"brigou com seu pai"})
+        const personagemAntigo = await personagemService.getById(personagem.id) 
+        await personagemService.update(personagem.id, {historia: "ele é fã da xuxa"})
+        const personagemNovo = await personagemService.getById(personagem.id) 
+        expect(personagemNovo?.historia).not.toEqual(personagemAntigo?.historia)
         
         
     })
 
-    it('Deleta personagem com sucesso', () => {
-        jogador.then(jogador => {
-            const personagem = personagemService.create(jogador.id,{nome:"Romeu", hisotira:"romeu você está respirando?"})
-            personagem.then(personagem => {
-            personagemService.delete(personagem.id)
-            const personagens = personagemService.getAll(jogador.id)
-            chai.expect(personagem).to.have.lengthOf(0)
-        })
-        })
+    it('Deleta personagem com sucesso', async() => {
+        const personagem = await personagemService.create(jogador.id,{nome:"Romeu", historia:"romeu você está respirando?"})
+        await personagemService.delete(personagem.id)
+        expect(await personagemService.getById(personagem.id)).toBeNull()
+            
         
     })
 })

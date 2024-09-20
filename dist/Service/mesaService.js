@@ -13,9 +13,8 @@ exports.MesaService = void 0;
 const MesaRepository_1 = require("../Repository/MesaRepository");
 const mesaRepository = new MesaRepository_1.MesaRepository();
 class MesaService {
-    create(body) {
+    create(mestreId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { mestreId } = body;
             const mesa = mesaRepository.create(mestreId);
             return mesa;
         });
@@ -37,7 +36,7 @@ class MesaService {
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            mesaRepository.delete(id);
+            yield mesaRepository.delete(id);
         });
     }
 }

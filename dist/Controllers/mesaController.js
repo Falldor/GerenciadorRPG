@@ -16,7 +16,7 @@ class MesaController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return res.status(201).json({ message: "mesa criada com sucesso", resource: yield mesaService.create(req.body) });
+                return res.status(201).json({ message: "mesa criada com sucesso", resource: yield mesaService.create(req.body.mestreId) });
             }
             catch (error) {
                 return res.status(500).json({ error: error });

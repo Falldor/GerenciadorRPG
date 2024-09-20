@@ -37,7 +37,7 @@ class HabilidadeService {
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            habilidadeRepository.delete(id);
+            yield habilidadeRepository.delete(id);
         });
     }
 }

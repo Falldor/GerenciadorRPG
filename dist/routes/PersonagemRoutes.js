@@ -2,11 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const PersonagemController_1 = require("../Controllers/PersonagemController");
+const personagem_validacao_1 = require("../shared/middleware/validacao/personagem.validacao");
 const router = (0, express_1.Router)();
 const personagemController = new PersonagemController_1.PersonagemController();
-router.post('/create/:jogadorId', personagemController.create);
-router.get('/getAll/:jogadorId', personagemController.getAll);
-router.get('/getById/:id', personagemController.getById);
-router.put('/edit/:id', personagemController.update);
-router.delete('/delete/:id', personagemController.delete);
+const validaPersonagem = new personagem_validacao_1.validacaoPersonagem();
+router.post('/create/:jogadorId', validaPersonagem.validaCriar, personagemController.create);
+router.get('/getAll/:jogadorId', validaPersonagem.validaIdJogador, personagemController.getAll);
+router.get('/getById/:id', validaPersonagem.validaId, personagemController.getById);
+router.put('/edit/:id', validaPersonagem.validaAtulizar, personagemController.update);
+router.delete('/delete/:id', validaPersonagem.validaId, personagemController.delete);
 exports.default = router;

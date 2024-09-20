@@ -37,7 +37,7 @@ class JogadorService {
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            jogadorRepository.delete(id);
+            yield jogadorRepository.delete(id);
         });
     }
 }

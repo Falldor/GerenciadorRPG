@@ -37,7 +37,7 @@ class MestreService {
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            mestreRepository.delete(id);
+            yield mestreRepository.delete(id);
         });
     }
     login(id, usuario, senha) {

@@ -37,7 +37,7 @@ class PersonagemService {
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            personagemRepository.delete(id);
+            yield personagemRepository.delete(id);
         });
     }
 }

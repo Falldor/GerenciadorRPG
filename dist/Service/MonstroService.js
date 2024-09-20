@@ -37,7 +37,7 @@ class MonstroService {
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            monstroRepository.delete(id);
+            yield monstroRepository.delete(id);
         });
     }
 }

@@ -20,6 +20,11 @@ export class HabilidadeRepository{
         return await prisma.habilidade.findMany()
     }
 
+    async getAllTipo(tipo:tipoHabilidade) {
+        return await prisma.habilidade.findMany({where:{tipo}})
+    }
+
+
     async getById(id:string):Promise<habilidade|null>{
         return await prisma.habilidade.findUnique({where: {id}})
     }

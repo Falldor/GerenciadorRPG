@@ -16,7 +16,7 @@ class MonstroController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return res.status(201).json({ message: "Monstro criada com sucesso", resource: yield monstroService.create(req.body) });
+                return res.status(201).json(yield monstroService.create(req.body));
             }
             catch (error) {
                 return res.status(500).json({ error: error });
@@ -28,7 +28,7 @@ class MonstroController {
             try {
                 const monstros = yield monstroService.getAll();
                 if (monstros.length > 0) {
-                    return res.status(200).json({ message: "Lista de personagens criados:", resource: monstros });
+                    return res.status(200).json(monstros);
                 }
                 else {
                     return res.status(200).json({ message: "nenhum monstro foi criado", resource: monstros });

@@ -2,7 +2,8 @@ import {  Request, Response ,NextFunction } from "express";
 
 export class validacaoPersonagem {
     validaCriar(req: Request, res: Response, next: NextFunction) {
-        const { nome, historia, idJogador } = req.body;
+        const idJogador = req.params.jogadorId
+        const { nome, historia } = req.body;
 
         if (nome) {
             if (typeof nome !== 'string') {

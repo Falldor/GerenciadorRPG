@@ -30,6 +30,11 @@ class HabilidadeRepository {
             return yield prisma.habilidade.findMany();
         });
     }
+    getAllTipo(tipo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prisma.habilidade.findMany({ where: { tipo } });
+        });
+    }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield prisma.habilidade.findUnique({ where: { id } });

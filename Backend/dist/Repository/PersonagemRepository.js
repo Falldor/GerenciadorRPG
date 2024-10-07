@@ -30,9 +30,14 @@ class PersonagemRepository {
             return novoPersonagem;
         });
     }
-    getAll(jogadorId) {
+    getAllPersonagensIdJogador(jogadorId) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield prisma.personagem.findMany({ where: { jogadorId } });
+        });
+    }
+    getAllPersonagens() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prisma.personagem.findMany();
         });
     }
     getById(id) {

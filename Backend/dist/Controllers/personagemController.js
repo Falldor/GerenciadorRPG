@@ -23,12 +23,29 @@ class PersonagemController {
             }
         });
     }
-    getAll(req, res) {
+    getAllPersonagensIdJogador(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const personagens = yield personagemService.getAll(req.params.jogadorId);
+                const personagens = yield personagemService.getAllPersonagensIdJogador(req.params.jogadorId);
                 if (personagens.length > 0) {
                     return res.status(200).json({ message: "Lista de personagens criados:", resource: personagens });
+                }
+                else {
+                    return res.status(200).json({ message: "nenhum personagem foi criado", resource: personagens });
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    getAllPersonagens(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const personagens = yield personagemService.getAllPersonagens();
+                if (personagens.length > 0) {
+                    return res.status(200).json(personagens);
                 }
                 else {
                     return res.status(200).json({ message: "nenhum personagem foi criado", resource: personagens });

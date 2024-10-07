@@ -12,8 +12,12 @@ export class PersonagemService {
         return personagem;
     }
 
-    async getAll(JogadorId:string): Promise<personagem[]>{
-        return personagemRepository.getAll(JogadorId);
+    async getAllPersonagensIdJogador(JogadorId:string): Promise<personagem[]>{
+        return personagemRepository.getAllPersonagensIdJogador(JogadorId);
+    }
+
+    async getAllPersonagens(): Promise<personagem[]>{
+        return personagemRepository.getAllPersonagens();
     }
 
     async getById(id:string): Promise<personagem|null>{

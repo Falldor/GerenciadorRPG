@@ -32,7 +32,6 @@ model Mesa {
   Mestre    Mestre?         @relation(fields: [mestreId], references: [id])
   mestreId  String?
   jogadores JogadoresMesa[]
-  monstros  MonstroMesa[]
 
   @@map("mesa")
 }
@@ -68,14 +67,12 @@ model personagem {
   vida        Int
   estresse    Int
   historia    String
-  habilidades personagemHabilidade[]
 
   @@map("personagem")
 }
 
 model monstro {
   id          String              @id @unique @default(uuid())
-  Mesas       MonstroMesa[]
   nome        String
   nivelFisico Int
   nivelMental Int
@@ -83,46 +80,16 @@ model monstro {
   vida        Int
   estresse    Int
   historia    String
-  habilidades monstroHabilidade[]
+  habilidadesID String[]
 
   @@map("monstro")
 }
 
-model MonstroMesa {
-  monstroId String  @map("monstroId")
-  mesaId    String  @map("mesaId")
-  monstro   monstro @relation(fields: [monstroId], references: [id])
-  mesa      Mesa    @relation(fields: [mesaId], references: [id])
-
-  @@id([monstroId, mesaId])
-  @@map("monstro_mesa")
-}
-
 model habilidade {
   id           String                 @id @unique @default(uuid())
-  personagem   personagemHabilidade[]
-  monstro      monstroHabilidade[]
   nome         String
   descricao    String
   tipo         tipoHabilidade
 }
 
-model personagemHabilidade {
-  personagem_id String     @map("personagem_id")
-  habilidade_id String     @map("habilidade_id")
-  personagem    personagem @relation(fields: [personagem_id], references: [id])
-  habilidade    habilidade @relation(fields: [habilidade_id], references: [id])
 
-  @@id([personagem_id, habilidade_id])
-  @@map("personagem_habilidade")
-}
-
-model monstroHabilidade {
-  habilidade_id String     @map("habilidade_id")
-  monstro_id    String     @map("monstro_id")
-  monstro       monstro    @relation(fields: [monstro_id], references: [id])
-  habilidade    habilidade @relation(fields: [habilidade_id], references: [id])
-
-  @@id([habilidade_id, monstro_id])
-  @@map("monstro_habilidade")
-}

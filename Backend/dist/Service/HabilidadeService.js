@@ -25,6 +25,11 @@ class HabilidadeService {
             return habilidadeRepository.getAll();
         });
     }
+    getAllTipo(tipo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return habilidadeRepository.getAllTipo(tipo);
+        });
+    }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return habilidadeRepository.getById(id);

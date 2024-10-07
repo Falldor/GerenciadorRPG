@@ -20,9 +20,14 @@ class PersonagemService {
             return personagem;
         });
     }
-    getAll(JogadorId) {
+    getAllPersonagensIdJogador(JogadorId) {
         return __awaiter(this, void 0, void 0, function* () {
-            return personagemRepository.getAll(JogadorId);
+            return personagemRepository.getAllPersonagensIdJogador(JogadorId);
+        });
+    }
+    getAllPersonagens() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return personagemRepository.getAllPersonagens();
         });
     }
     getById(id) {

@@ -14,11 +14,25 @@ export class PersonagemController{
 
     }
 
-    async getAll(req: Request, res:Response){
+    async getAllPersonagensIdJogador(req: Request, res:Response){
         try {
-            const personagens = await personagemService.getAll(req.params.jogadorId)
+            const personagens = await personagemService.getAllPersonagensIdJogador(req.params.jogadorId)
             if(personagens.length > 0){
                 return res.status(200).json({message:"Lista de personagens criados:", resource:personagens})
+            }else{
+                return res.status(200).json({message:"nenhum personagem foi criado", resource: personagens})
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({error :error})
+        }
+    }
+
+    async getAllPersonagens(req: Request, res:Response){
+        try {
+            const personagens = await personagemService.getAllPersonagens()
+            if(personagens.length > 0){
+                return res.status(200).json(personagens)
             }else{
                 return res.status(200).json({message:"nenhum personagem foi criado", resource: personagens})
             }

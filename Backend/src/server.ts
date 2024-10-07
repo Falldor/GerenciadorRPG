@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'
 import mestreRoutes from './routes/MestreRoutes'
 import MesaRoutes from './routes/MesaRoutes'
 import JogadorRoutes from './routes/JogadorRoutes'
@@ -9,15 +10,15 @@ import { authenticateTokenMiddleware } from './shared/middleware/autenticacao';
 
 const app = express();
 const port = 3000;
-
+app.use(cors())
 app.use(express.json())
 
 app.use('/mestre',mestreRoutes)
 app.use('/mesa', authenticateTokenMiddleware, MesaRoutes)
 app.use('/jogador', JogadorRoutes)
-app.use('/personagem', authenticateTokenMiddleware, PersonagemRoutes)
-app.use('/monstro', authenticateTokenMiddleware,MonstroRoutes)
-app.use('/habilidade', authenticateTokenMiddleware, HabilidadeRoutes)
+app.use('/personagem', PersonagemRoutes)
+app.use('/monstro',MonstroRoutes)
+app.use('/habilidade', HabilidadeRoutes)
 //app.use('/naMesa', NaMesaRoutes)
 
 

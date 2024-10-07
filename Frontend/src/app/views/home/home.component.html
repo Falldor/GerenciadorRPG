@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div *ngIf="personagens ; else loadingTemplate">
+    <ul>
+      <li *ngFor="let personagem of personagens">
+        Nome: {{ personagem.nome }}
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Template de carregamento -->
+  <ng-template #loadingTemplate>
+    <p>Carregando personagens...</p>
+  </ng-template>

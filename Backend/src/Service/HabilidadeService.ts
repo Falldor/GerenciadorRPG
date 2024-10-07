@@ -1,5 +1,5 @@
 import { HabilidadeRepository } from '../Repository/HabilidadeRepository'
-import { habilidade } from '@prisma/client'
+import { habilidade, tipoHabilidade } from '@prisma/client'
 
 
 const habilidadeRepository = new HabilidadeRepository()
@@ -14,6 +14,9 @@ export class HabilidadeService {
 
     async getAll(): Promise<habilidade[]>{
         return habilidadeRepository.getAll();
+    }
+    async getAllTipo(tipo:tipoHabilidade): Promise<habilidade[]>{
+        return habilidadeRepository.getAllTipo(tipo);
     }
 
     async getById(id:string): Promise<habilidade|null>{

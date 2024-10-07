@@ -21,8 +21,12 @@ export class PersonagemRepository{
         return novoPersonagem
     }
 
-    async getAll(jogadorId:string) {
+    async getAllPersonagensIdJogador(jogadorId:string) {
         return await prisma.personagem.findMany({where:{jogadorId}})
+    }
+
+    async getAllPersonagens() {
+        return await prisma.personagem.findMany()
     }
 
     async getById(id:string):Promise<personagem|null>{

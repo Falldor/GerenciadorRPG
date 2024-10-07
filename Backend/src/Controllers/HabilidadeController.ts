@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { habilidade, PrismaClient, tipoHabilidade } from '@prisma/client'
 import { HabilidadeService} from '../Service/HabilidadeService'
 
 const hablidadeService = new HabilidadeService()
@@ -22,6 +22,25 @@ export class HabilidadeController{
                 return res.status(200).json({ message: "Lista de habilidades criados:", resource: Hablidades })
             } else {
                 return res.status(200).json({ message: "nenhuma habilidade foi criada", resource: Hablidades })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({ error: error })
+        }
+    }
+
+    async getAllTipo(req: Request, res: Response) {
+        try {
+            let Habilidades:habilidade[] = []
+            if(req.params.tipo == tipoHabilidade.fisico){
+                Habilidades = await hablidadeService.getAllTipo(tipoHabilidade.fisico)
+            }else{
+                Habilidades = await hablidadeService.getAllTipo(tipoHabilidade.mental)
+            }
+            if (Habilidades.length > 0) {
+                return res.status(200).json(Habilidades)
+            } else {
+                return res.status(200).json(Habilidades)
             }
         } catch (error) {
             console.log(error)

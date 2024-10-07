@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   imports: [
     RouterOutlet,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -22,6 +22,7 @@ export class AppComponent {
   title = 'Frontend';
 
   constructor(private router: Router){}
+  
 
   navegaHome(){
     this.router.navigate([''])

@@ -1,0 +1,13 @@
+.modal-containers {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.container {
+    padding: 20px;
+}
+
+.create {
+    margin-right: 5%;
+}

@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validacaoPersonagem = void 0;
 class validacaoPersonagem {
     validaCriar(req, res, next) {
-        const { nome, historia, idJogador } = req.body;
+        const idJogador = req.params.jogadorId;
+        const { nome, historia } = req.body;
         if (nome) {
             if (typeof nome !== 'string') {
                 return res.status(400).json({ message: "O campo nome deve ser uma string, insira um nome válido" });

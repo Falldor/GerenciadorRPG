@@ -7,7 +7,7 @@ export class MonstroController {
 
     async create(req: Request, res: Response) {
         try {
-            return res.status(201).json({ message: "Monstro criada com sucesso", resource: await monstroService.create(req.body) })
+            return res.status(201).json(await monstroService.create(req.body))
         } catch (error) {
             return res.status(500).json({ error: error })
         }
@@ -18,7 +18,7 @@ export class MonstroController {
         try {
             const monstros = await monstroService.getAll()
             if (monstros.length > 0) {
-                return res.status(200).json({ message: "Lista de personagens criados:", resource: monstros })
+                return res.status(200).json(monstros)
             } else {
                 return res.status(200).json({ message: "nenhum monstro foi criado", resource: monstros })
             }

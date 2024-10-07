@@ -1,1 +1,9 @@
-<p>monstros works!</p>
+<div *ngIf="monstros">
+    <ul>
+        <li *ngFor="let monstro of monstros">Nome:{{monstro.nome}} | Historia: {{monstro.historia}}</li>
+    </ul>
+</div>
+
+
+<button mat-flat-button (click)="openAddDialog()">Add monstro</button>
+

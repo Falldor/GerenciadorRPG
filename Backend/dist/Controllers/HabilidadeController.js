@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HabilidadeController = void 0;
+const client_1 = require("@prisma/client");
 const HabilidadeService_1 = require("../Service/HabilidadeService");
 const hablidadeService = new HabilidadeService_1.HabilidadeService();
 class HabilidadeController {
@@ -32,6 +33,29 @@ class HabilidadeController {
                 }
                 else {
                     return res.status(200).json({ message: "nenhuma habilidade foi criada", resource: Hablidades });
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ error: error });
+            }
+        });
+    }
+    getAllTipo(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let Habilidades = [];
+                if (req.params.tipo == client_1.tipoHabilidade.fisico) {
+                    Habilidades = yield hablidadeService.getAllTipo(client_1.tipoHabilidade.fisico);
+                }
+                else {
+                    Habilidades = yield hablidadeService.getAllTipo(client_1.tipoHabilidade.mental);
+                }
+                if (Habilidades.length > 0) {
+                    return res.status(200).json(Habilidades);
+                }
+                else {
+                    return res.status(200).json(Habilidades);
                 }
             }
             catch (error) {

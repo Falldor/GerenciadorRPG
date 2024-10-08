@@ -58,7 +58,8 @@ export class PersonagemController{
 
      async update(req: Request, res: Response){
         try {
-            const {id} = req.params
+            console.log(req.params)
+            const id = req.params.id
             const novoPersonagem = await personagemService.update(id, req.body)
             if(novoPersonagem){
                 return res.status(200).json({message: "Personagem:", resource: novoPersonagem})

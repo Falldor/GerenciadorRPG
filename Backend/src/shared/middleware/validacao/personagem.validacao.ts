@@ -33,7 +33,7 @@ export class validacaoPersonagem {
     }
 
     validaId(req: Request, res: Response, next: NextFunction){
-        const id = req.body
+        const id = req.params.id
         if (id) {
             if (typeof id !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });
@@ -57,7 +57,8 @@ export class validacaoPersonagem {
     }
 
     validaAtulizar(req: Request, res: Response, next: NextFunction){
-        const {id,nome, historia} = req.body
+        const id = req.params.id
+        const {nome, historia} = req.body
 
         if (id) {
             if (typeof id !== 'string') {

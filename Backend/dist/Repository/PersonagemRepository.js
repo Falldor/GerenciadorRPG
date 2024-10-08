@@ -47,6 +47,7 @@ class PersonagemRepository {
     }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(id);
             return yield prisma.personagem.update({ where: { id }, data });
         });
     }

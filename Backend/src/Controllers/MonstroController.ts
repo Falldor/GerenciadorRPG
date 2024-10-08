@@ -44,6 +44,7 @@ export class MonstroController {
 
     async update(req: Request, res: Response) {
         try {
+            console.log("edit")
             const { id } = req.params
             const novoMonstro = await monstroService.update(id, req.body)
             if (novoMonstro) {

@@ -60,6 +60,7 @@ class MonstroController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log("edit");
                 const { id } = req.params;
                 const novoMonstro = yield monstroService.update(id, req.body);
                 if (novoMonstro) {

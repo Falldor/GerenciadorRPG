@@ -1,14 +1,16 @@
-.modal-containers {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+.table{
+    padding: 5%;
+    
 }
 
-app-modal-create, app-modal-b {
-    width: 45%; /* Ajuste o tamanho conforme necessário */
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+.button_container{
+    display: flex;
+    justify-content:flex-end;
+    margin-bottom: 1%;
+
+}
+
+
+tr.teste:not(.example-expanded-row):hover {
+    background: whitesmoke;
   }

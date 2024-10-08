@@ -1,1 +1,25 @@
-<p>personagens works!</p>
+
+<div *ngIf="personagens" class="table">
+    <div class="button_container">
+        <button mat-flat-button class="add_button" (click)="openAddDialog()">Adicionar personagem</button>
+    </div>
+    <table mat-table [dataSource]="personagens" multiTemplateDataRows>
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef>Nome</th>
+            <td mat-cell *matCellDef="let personagem">{{personagem.nome}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nivelFisico">
+            <th mat-header-cell *matHeaderCellDef>NIvel Físico</th>
+            <td mat-cell *matCellDef="let personagem">{{personagem.nivelFisico}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nivelMental">
+            <th mat-header-cell *matHeaderCellDef>Nivel Mental</th>
+            <td mat-cell *matCellDef="let personagem">{{personagem.nivelMental}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openEditDialog(row)" class="teste"></tr>
+    </table>
+    
+</div>
+<li>Editar personagem</li>
+<li>Remover Personagem</li>

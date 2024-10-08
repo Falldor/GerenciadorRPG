@@ -1,15 +1,15 @@
 <div class="container">
     <div class="create">
         <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-            <p>Insira as informações do monstro</p>
+            <p>Insira as informações do {{data.tipo}}</p>
             <mat-form-field>
                 <mat-label>Nome</mat-label>
-                <input matInput type="text" id="nome" formControlName="nome" placeholder="Digite o nome do monstro">
+                <input matInput type="text" id="nome" formControlName="nome" placeholder="Digite o nome do {{data.tipo}}">
                 
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Historia</mat-label>
-                <textarea matInput type="text" id="historia" formControlName="historia" placeholder="escreva a historia do monstro"></textarea>
+                <textarea matInput type="text" id="historia" formControlName="historia" placeholder="escreva a historia do {{data.tipo}}"></textarea>
             </mat-form-field>
             
         </form>
@@ -36,5 +36,5 @@
             </div>
         </div>
     </div>
-    <button mat-flat-button type="submit" (click)="onSubmit()">Add monstro</button>
+    <button mat-flat-button type="submit" (click)="onSubmit()">Add {{data.tipo}}</button>
 </div>

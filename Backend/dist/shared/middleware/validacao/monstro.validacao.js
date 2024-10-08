@@ -20,7 +20,7 @@ class validacaoMonstro {
         return next();
     }
     validaId(req, res, next) {
-        const id = req.body;
+        const id = req.params.id;
         if (id) {
             if (typeof id !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });
@@ -32,7 +32,8 @@ class validacaoMonstro {
         return next();
     }
     validaAtulizar(req, res, next) {
-        const { id, nome, historia } = req.body;
+        const id = req.params.id;
+        const { nome, historia } = req.body;
         if (id) {
             if (typeof id !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });

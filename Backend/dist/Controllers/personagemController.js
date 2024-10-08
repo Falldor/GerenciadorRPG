@@ -77,7 +77,8 @@ class PersonagemController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = req.params;
+                console.log(req.params);
+                const id = req.params.id;
                 const novoPersonagem = yield personagemService.update(id, req.body);
                 if (novoPersonagem) {
                     return res.status(200).json({ message: "Personagem:", resource: novoPersonagem });

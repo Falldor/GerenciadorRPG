@@ -34,6 +34,7 @@ export class PersonagemRepository{
     }
 
     async update(id:string, data: Partial<personagem>):Promise<personagem|null>{
+        console.log(id)
         return await prisma.personagem.update({where:{id}, data})
     }
 

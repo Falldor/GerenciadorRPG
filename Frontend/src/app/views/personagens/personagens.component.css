@@ -1,0 +1,15 @@
+.table{
+    padding: 5%;
+    
+}
+
+.button_container{
+    display: flex;
+    justify-content:flex-end;
+    margin-bottom: 1%;
+
+}
+
+tr.teste:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }

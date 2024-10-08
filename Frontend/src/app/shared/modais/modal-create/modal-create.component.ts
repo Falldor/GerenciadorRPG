@@ -1,11 +1,12 @@
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ModalHabilidadeComponent } from '../modal-habilidade/modal-habilidade.component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { PersonagemService } from '../../../services/personagem.service';
 import { HabilidadeService } from '../../../services/habilidade.service';
 import { habilidade } from '../../../Interfaces/habilidade.interface';
 import { MonstroService } from '../../../services/monstro.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component,inject ,Inject, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
@@ -15,13 +16,14 @@ import { firstValueFrom } from 'rxjs';
 
 
 
+
 @Component({
   selector: 'app-modal-create',
   standalone: true,
   imports: [NgIf, NgFor,MatButton, MatIconModule, MatDialogModule, ModalHabilidadeComponent, MatInputModule, MatFormFieldModule, ReactiveFormsModule],
   templateUrl: './modal-create.component.html',
   styleUrl: './modal-create.component.css',
-  providers: [MonstroService, HabilidadeService]
+  providers: [MonstroService, HabilidadeService, PersonagemService]
 })
 export class ModalCreateComponent implements OnInit {
   formulario: FormGroup
@@ -34,7 +36,14 @@ export class ModalCreateComponent implements OnInit {
     console.log(this.habilidadesMentais)
   }
 
-  constructor(private router: Router, private monstroService: MonstroService,private habilidadeService:HabilidadeService , private dialogAtual: MatDialogRef<ModalCreateComponent>) {
+  constructor(
+    private router: Router,
+    private monstroService: MonstroService,
+    private habilidadeService:HabilidadeService ,
+    private dialogAtual: MatDialogRef<ModalCreateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data:{tipo:string},
+    private personagemService: PersonagemService
+  ) {
     this.formulario = new FormGroup({
       nome: new FormControl(''),
       historia: new FormControl('')
@@ -53,9 +62,8 @@ export class ModalCreateComponent implements OnInit {
   onSubmit() {
     if(this.router.url == "/monstros"){
       this.monstroService.create(this.formulario)
-
     }else{
-
+      this.personagemService.create(this.formulario)
     }
     this.dialogAtual.close()
   }

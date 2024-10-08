@@ -6,18 +6,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { Component, inject, OnInit } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
+import { MatTableModule } from '@angular/material/table';
+import { EditComponent } from '../../shared/modais/edit/edit.component';
 
 @Component({
   selector: 'app-monstros',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, NgIf, NgFor, ModalCreateComponent],
+  imports: [MatButtonModule, MatDialogModule, NgIf, NgFor, ModalCreateComponent, MatTableModule],
   templateUrl: './monstros.component.html',
   styleUrl: './monstros.component.css',
   providers: [MonstroService]
 })
 export class MonstrosComponent implements OnInit {
   readonly dialog = inject(MatDialog)
+
+  displayedColumns:string[] = ['nome', 'nivelFisico', 'nivelMental']
   monstros: monstro[] = []
+
   constructor(private monstroService: MonstroService) { }
 
   async ngOnInit(): Promise<void> {
@@ -26,7 +31,7 @@ export class MonstrosComponent implements OnInit {
   }
 
   openAddDialog() {
-    const dialogRef = this.dialog.open(ModalCreateComponent, { height: '75%', width: '95%' });
+    const dialogRef = this.dialog.open(ModalCreateComponent, { height: '75%', width: '95%', data: {tipo:'monstro'} });
     dialogRef.afterClosed().subscribe(() => {window.location.reload()})
   }
 
@@ -36,6 +41,12 @@ export class MonstrosComponent implements OnInit {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  openEditDialog(monstro:monstro){
+    const dialogRef = this.dialog.open(EditComponent, {data:{monstro}})
+    dialogRef.afterClosed().subscribe(() => {window.location.reload()})
+  
   }
 
 

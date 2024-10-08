@@ -22,4 +22,13 @@ export class MonstroService {
   getAll(){
     return this.http.get<monstro[]>(`${this.apiUrl}/monstro/getAll`)
   }
+
+  edit(id:string, form: FormGroup){
+    const formData = form.value
+    this.http.put(`${this.apiUrl}/monstro/edit/${id}`, formData).subscribe((res) => {console.log(res)})
+  }
+
+  delete(id:string){
+    this.http.delete(`${this.apiUrl}/monstro/delete/${id}`).subscribe((res) => {console.log(res)})
+  }
 }

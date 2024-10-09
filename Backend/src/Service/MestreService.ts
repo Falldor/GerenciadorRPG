@@ -20,6 +20,10 @@ export class MestreService {
         return mestreRepository.getById(id);
     }
 
+    async geByEmail(email:string){
+        return mestreRepository.getByEmail(email)
+    }
+
     async update(id:string, data: Partial<Mestre>):Promise<Mestre|null>{
         return mestreRepository.update(id, data)
     }
@@ -28,8 +32,8 @@ export class MestreService {
         await mestreRepository.delete(id);
     }
 
-    async login(id:string, usuario: string, senha:string){
-        const mestre = await this.getById(id)
+    async login(usuario: string, senha:string){
+        const mestre = await this.geByEmail(usuario)
         if(mestre?.senha == senha && mestre.usuario == usuario){
             
             return true

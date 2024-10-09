@@ -11,6 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JogadorController = void 0;
 const JogadorService_1 = require("../Service/JogadorService");
+const JWTService_1 = require("../Service/JWTService");
+const jwtService = new JWTService_1.JWTService();
 const jogadorService = new JogadorService_1.JogadorService();
 class JogadorController {
     create(req, res) {
@@ -77,6 +79,31 @@ class JogadorController {
             try {
                 yield jogadorService.delete(req.params.id);
                 res.status(204).json({ message: "Deletada com sucesso" });
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
+    login(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { usuario, senha } = req.body;
+                if (yield jogadorService.login(usuario, senha)) {
+                    const token = jwtService.signIn(usuario);
+                    token.then(valor => {
+                        if (valor == "chave_não_encontrada") {
+                            res.status(500).json();
+                        }
+                        else {
+                            res.status(200).json({ valor });
+                        }
+                    });
+                }
+                else {
+                    res.status(500).json();
+                }
             }
             catch (error) {
                 console.log(error);

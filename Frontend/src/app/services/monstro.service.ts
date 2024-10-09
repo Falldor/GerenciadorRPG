@@ -1,8 +1,11 @@
 import { monstro } from '../Interfaces/monstro.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../envs/env';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+const headers = new HttpHeaders({
+  'Auth': `${environment.AUTH_TOKEN}`
+});
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +19,19 @@ export class MonstroService {
 
   create(form: FormGroup){
     const formData = form.value
-    this.http.post(`${this.apiUrl}/monstro/create`, formData).subscribe((res) => {console.log(res)})
+    this.http.post(`${this.apiUrl}/monstro/create`, formData,{headers}).subscribe((res) => {console.log(res)})
   }
 
   getAll(){
-    return this.http.get<monstro[]>(`${this.apiUrl}/monstro/getAll`)
+    return this.http.get<monstro[]>(`${this.apiUrl}/monstro/getAll`, {headers})
   }
 
   edit(id:string, form: FormGroup){
     const formData = form.value
-    this.http.put(`${this.apiUrl}/monstro/edit/${id}`, formData).subscribe((res) => {console.log(res)})
+    this.http.put(`${this.apiUrl}/monstro/edit/${id}`, formData, {headers}).subscribe((res) => {console.log(res)})
   }
 
   delete(id:string){
-    this.http.delete(`${this.apiUrl}/monstro/delete/${id}`).subscribe((res) => {console.log(res)})
+    this.http.delete(`${this.apiUrl}/monstro/delete/${id}`, {headers}).subscribe((res) => {console.log(res)})
   }
 }

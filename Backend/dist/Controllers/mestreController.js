@@ -89,9 +89,9 @@ class MestreController {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id, usuario, senha } = req.body;
-                if (yield mestreService.login(id, usuario, senha)) {
-                    const token = jwtService.signIn(id);
+                const { usuario, senha } = req.body;
+                if (yield mestreService.login(usuario, senha)) {
+                    const token = jwtService.signIn(usuario);
                     token.then(valor => {
                         if (valor == "chave_não_encontrada") {
                             res.status(500).json();

@@ -23,6 +23,36 @@ class MesaController {
             }
         });
     }
+    addMonstro(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id = req.params.idMesa;
+                const novaMesa = yield mesaService.addMonstro(id, req.body);
+                if (novaMesa) {
+                    return res.status(200).json(novaMesa);
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
+    addPersonagem(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id = req.params.idMesa;
+                const novaMesa = yield mesaService.addPersonagem(id, req.body);
+                if (novaMesa) {
+                    return res.status(200).json(novaMesa);
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -46,7 +76,7 @@ class MesaController {
             try {
                 const mesa = yield mesaService.getById(req.params.idMesa);
                 if (mesa) {
-                    return res.status(200).json({ message: "Mestre:", resource: mesa });
+                    return res.status(200).json(mesa);
                 }
                 else {
                     return res.status(200).json({ message: "Nenhuma mesa foi cadastrado com o id " + req.params.id });
@@ -61,10 +91,11 @@ class MesaController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { id } = req.params;
-                const novaMesa = yield mesaService.update(id, req.body);
+                console.log(req.body);
+                const { idMesa } = req.params;
+                const novaMesa = yield mesaService.update(idMesa, req.body);
                 if (novaMesa) {
-                    return res.status(200).json({ message: "Mestre:", resource: novaMesa });
+                    return res.status(200).json(novaMesa);
                 }
             }
             catch (error) {
@@ -77,6 +108,18 @@ class MesaController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield mesaService.delete(req.params.idMesa);
+                res.status(204).json({ message: "Deletada com sucesso" });
+            }
+            catch (error) {
+                console.log(error);
+                res.status(500).json({ resource: error });
+            }
+        });
+    }
+    deleteMianura(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield mesaService.delete(req.params.idMianutura);
                 res.status(204).json({ message: "Deletada com sucesso" });
             }
             catch (error) {

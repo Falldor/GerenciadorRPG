@@ -30,6 +30,11 @@ class MestreService {
             return mestreRepository.getById(id);
         });
     }
+    geByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return mestreRepository.getByEmail(email);
+        });
+    }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             return mestreRepository.update(id, data);
@@ -40,9 +45,9 @@ class MestreService {
             yield mestreRepository.delete(id);
         });
     }
-    login(id, usuario, senha) {
+    login(usuario, senha) {
         return __awaiter(this, void 0, void 0, function* () {
-            const mestre = yield this.getById(id);
+            const mestre = yield this.geByEmail(usuario);
             if ((mestre === null || mestre === void 0 ? void 0 : mestre.senha) == senha && mestre.usuario == usuario) {
                 return true;
             }

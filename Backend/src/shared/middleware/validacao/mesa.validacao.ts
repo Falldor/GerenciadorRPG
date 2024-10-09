@@ -3,7 +3,7 @@ import {  Request, Response ,NextFunction } from "express";
 export class validacaoMesa {
 
     validaCriar(req: Request, res: Response, next: NextFunction) {
-        const mestreId = req.body;
+        const {mestreId} = req.body;
 
         if (mestreId) {
             if (typeof mestreId !== 'string') {
@@ -19,7 +19,7 @@ export class validacaoMesa {
     }
 
     validaId(req: Request, res: Response, next: NextFunction){
-        const idMesa = req.body;
+        const idMesa = req.params.idMesa;
         if (idMesa) {
             if (typeof idMesa !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });
@@ -31,7 +31,7 @@ export class validacaoMesa {
     }
 
     validaIdMestre(req: Request, res: Response, next: NextFunction){
-        const mestreId = req.body;
+        const {mestreId} = req.body;
         if (mestreId) {
             if (typeof mestreId !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });

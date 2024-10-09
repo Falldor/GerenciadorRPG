@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validacaoMesa = void 0;
 class validacaoMesa {
     validaCriar(req, res, next) {
-        const mestreId = req.body;
+        const { mestreId } = req.body;
         if (mestreId) {
             if (typeof mestreId !== 'string') {
                 return res.status(400).json({ message: "O campo mestreId deve ser uma string, insira um mestreId válido" });
@@ -15,7 +15,7 @@ class validacaoMesa {
         return next();
     }
     validaId(req, res, next) {
-        const idMesa = req.body;
+        const idMesa = req.params.idMesa;
         if (idMesa) {
             if (typeof idMesa !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });
@@ -27,7 +27,7 @@ class validacaoMesa {
         return next();
     }
     validaIdMestre(req, res, next) {
-        const mestreId = req.body;
+        const { mestreId } = req.body;
         if (mestreId) {
             if (typeof mestreId !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });

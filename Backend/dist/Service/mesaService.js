@@ -19,6 +19,18 @@ class MesaService {
             return mesa;
         });
     }
+    addMonstro(mesaId, monstroId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const mesa = mesaRepository.addMonstro(mesaId, monstroId);
+            return mesa;
+        });
+    }
+    addPersonagem(mesaId, personagemId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const mesa = mesaRepository.addPersonagem(mesaId, personagemId);
+            return mesa;
+        });
+    }
     getAll(mestreId) {
         return __awaiter(this, void 0, void 0, function* () {
             return mesaRepository.getAll(mestreId);

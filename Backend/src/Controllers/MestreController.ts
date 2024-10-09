@@ -73,9 +73,9 @@ export class MestreController {
 
     async login(req: Request, res: Response){
         try {
-            const {id, usuario, senha} = req.body
-            if(await mestreService.login(id, usuario, senha)){
-                const token = jwtService.signIn(id)
+            const {usuario, senha} = req.body
+            if(await mestreService.login(usuario, senha)){
+                const token = jwtService.signIn(usuario)
                 token.then(valor => {
                     if(valor == "chave_não_encontrada"){
                         res.status(500).json()

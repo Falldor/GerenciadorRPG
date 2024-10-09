@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { JogadorService } from '../Service/JogadorService'
+import { JWTService } from '../Service/JWTService';
 
-
+const jwtService = new JWTService()
 const jogadorService = new JogadorService()
 
 export class JogadorController{
@@ -62,6 +63,25 @@ export class JogadorController{
             
             await jogadorService.delete(req.params.id)
             res.status(204).json({message:"Deletada com sucesso"})
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({resource:error})
+        }
+    }
+
+    async login(req: Request, res: Response){
+        try {
+            const {usuario, senha} = req.body
+            if(await jogadorService.login(usuario, senha)){
+                const token = jwtService.signIn(usuario)
+                token.then(valor => {
+                    if(valor == "chave_não_encontrada"){
+                        res.status(500).json()
+                    }else{
+                        res.status(200).json({valor})
+                    }
+                })
+            }else{res.status(500).json()}
         } catch (error) {
             console.log(error)
             res.status(500).json({resource:error})

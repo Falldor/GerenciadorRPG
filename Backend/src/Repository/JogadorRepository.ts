@@ -23,6 +23,10 @@ export class JogadorRepository{
         return await prisma.jogador.findUnique({where: {id}})
     }
 
+    async getByEmail(usuario:string):Promise<jogador|null>{
+        return await prisma.jogador.findFirst({where: {usuario}})
+    }
+
     async update(id:string, data: Partial<jogador>):Promise<jogador|null>{
         return await prisma.jogador.update({where:{id}, data})
     }

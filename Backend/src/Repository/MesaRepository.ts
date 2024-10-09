@@ -26,6 +26,15 @@ export class MesaRepository{
         return await prisma.mesa.update({where:{id}, data})
     }
 
+    async addMonstro(id:string, data: Partial<Mesa>):Promise<Mesa|null>{
+        
+        return await prisma.mesa.update({where:{id}, data})
+    }
+
+    async addPersonagem(id:string, data: Partial<Mesa>):Promise<Mesa|null>{
+        return await prisma.mesa.update({where:{id}, data})
+    }
+
     async delete(id:string){
         return await prisma.mesa.delete({where:{id}})
     }

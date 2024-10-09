@@ -8,15 +8,13 @@ export const authenticateTokenMiddleware = (
   next: NextFunction
 ) => {
   const authHeader = String(req.headers['auth']);
-
   if(!authHeader){
     res.status(401).json({message: "não autenticado"})
   }
   try {
     const jwtData = jwtService.verify(authHeader);
     jwtData.then(valor => {
-      console.log(valor)
-      if (valor === "Chave não encontrada"){
+      if (valor === "Chave não encontrada" || valor === "Token_invalido"){
           res.status(500).json({message: "Erro ao verificar token"})
       }else{
         return next()

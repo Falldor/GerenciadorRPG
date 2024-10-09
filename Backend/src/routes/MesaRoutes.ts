@@ -10,9 +10,11 @@ const mesaController = new MesaController();
 const validaMesa = new validacaoMesa()
 
 router.post('/create', authenticateTokenMiddleware,validaMesa.validaCriar,mesaController.create)
-router.get('/getAll/:mestreId', authenticateTokenMiddleware,validaMesa.validaIdMestre, mesaController.getAll)
+router.get('/getAll/:mestreId', authenticateTokenMiddleware,authenticateTokenMiddleware,validaMesa.validaIdMestre, mesaController.getAll)
 router.get('/getById/:idMesa', authenticateTokenMiddleware,validaMesa.validaId,mesaController.getById)
-router.put('/edit/:idMesa', authenticateTokenMiddleware,validaMesa.validaId,mesaController.update)
-router.delete('/delete/:idMesa', authenticateTokenMiddleware,validaMesa.validaId,mesaController.delete)
+router.put('/edit/:idMesa',authenticateTokenMiddleware,validaMesa.validaId,mesaController.update)
+router.put('/addMonstro/:idMesa', authenticateTokenMiddleware,validaMesa.validaId,mesaController.update)
+router.put('/addPersonagem/:idMesa', authenticateTokenMiddleware,validaMesa.validaId,mesaController.update)
+router.delete('/delete/:idMesa', authenticateTokenMiddleware,authenticateTokenMiddleware,validaMesa.validaId,mesaController.delete)
 
 export default router

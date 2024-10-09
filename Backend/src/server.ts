@@ -14,7 +14,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/mestre',mestreRoutes)
-app.use('/mesa', authenticateTokenMiddleware, MesaRoutes)
+app.use('/mesa', MesaRoutes)
 app.use('/jogador', JogadorRoutes)
 app.use('/personagem', PersonagemRoutes)
 app.use('/monstro',MonstroRoutes)

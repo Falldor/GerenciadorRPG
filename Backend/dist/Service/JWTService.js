@@ -47,7 +47,6 @@ class JWTService {
             if (!process.env.JWT_SECRET)
                 return "Chave não encontrada";
             try {
-                console.log(token);
                 const decoded = jwt.verify(token, process.env.JWT_SECRET);
                 return decoded;
             }

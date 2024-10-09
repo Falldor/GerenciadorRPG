@@ -15,6 +15,33 @@ export class MesaController{
 
     }
 
+    async addMonstro(req: Request, res: Response) {
+        try {
+            const id = req.params.idMesa
+            const novaMesa = await mesaService.addMonstro(id, req.body)
+            if(novaMesa){
+                return res.status(200).json(novaMesa)
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({resource:error})
+        }
+
+    }
+
+    async addPersonagem(req: Request, res: Response){
+        try {
+            const id = req.params.idMesa
+            const novaMesa = await mesaService.addPersonagem(id, req.body)
+            if(novaMesa){
+                return res.status(200).json(novaMesa)
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({resource:error})
+        }
+    }
+
     async getAll(req: Request, res:Response){
         try {
             const {mestreId} = req.params
@@ -34,7 +61,7 @@ export class MesaController{
         try {
             const mesa = await mesaService.getById(req.params.idMesa)
             if(mesa){
-                return res.status(200).json({message: "Mestre:", resource: mesa})
+                return res.status(200).json(mesa)
             }else{
                 return res.status(200).json({message:"Nenhuma mesa foi cadastrado com o id " + req.params.id})
             }
@@ -46,10 +73,11 @@ export class MesaController{
 
      async update(req: Request, res: Response){
         try {
-            const {id} = req.params
-            const novaMesa = await mesaService.update(id, req.body)
+            console.log(req.body)
+            const {idMesa} = req.params
+            const novaMesa = await mesaService.update(idMesa, req.body)
             if(novaMesa){
-                return res.status(200).json({message: "Mestre:", resource: novaMesa})
+                return res.status(200).json(novaMesa)
             }
         } catch (error) {
             console.log(error)
@@ -59,8 +87,17 @@ export class MesaController{
 
     async delete(req: Request, res: Response){
         try {
-            
             await mesaService.delete(req.params.idMesa)
+            res.status(204).json({message:"Deletada com sucesso"})
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({resource:error})
+        }
+    }
+
+    async deleteMianura(req: Request, res: Response){
+        try {
+            await mesaService.delete(req.params.idMianutura)
             res.status(204).json({message:"Deletada com sucesso"})
         } catch (error) {
             console.log(error)

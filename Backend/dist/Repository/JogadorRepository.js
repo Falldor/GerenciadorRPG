@@ -34,6 +34,11 @@ class JogadorRepository {
             return yield prisma.jogador.findUnique({ where: { id } });
         });
     }
+    getByEmail(usuario) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prisma.jogador.findFirst({ where: { usuario } });
+        });
+    }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield prisma.jogador.update({ where: { id }, data });

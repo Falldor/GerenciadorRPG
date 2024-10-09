@@ -11,6 +11,16 @@ export class MesaService {
         return mesa;
     }
 
+    async addMonstro(mesaId: string, monstroId: Partial<Mesa>){
+        const mesa = mesaRepository.addMonstro(mesaId, monstroId)
+        return mesa
+    }
+
+    async addPersonagem(mesaId: string, personagemId: Partial<Mesa>){
+        const mesa = mesaRepository.addPersonagem(mesaId, personagemId)
+        return mesa
+    }
+
     async getAll(mestreId:string): Promise<Mesa[]>{
         return mesaRepository.getAll(mestreId);
     }

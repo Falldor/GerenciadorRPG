@@ -38,6 +38,16 @@ class MesaRepository {
             return yield prisma.mesa.update({ where: { id }, data });
         });
     }
+    addMonstro(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prisma.mesa.update({ where: { id }, data });
+        });
+    }
+    addPersonagem(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield prisma.mesa.update({ where: { id }, data });
+        });
+    }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield prisma.mesa.delete({ where: { id } });

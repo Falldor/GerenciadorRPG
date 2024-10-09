@@ -1,0 +1,32 @@
+.menu {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu ul li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu ul li:hover {
+    background-color: #e0e0e0;
+  }
+  .table_container{
+    padding: 10%;
+  }
+
+  tr.teste:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }

@@ -22,6 +22,10 @@ export class MestreRepository{
         return await prisma.mestre.findUnique({where: {id}})
     }
 
+    async getByEmail(usuario:string):Promise<Mestre|null>{
+        return await prisma.mestre.findFirst({where: {usuario}})
+    }
+
     async update(id:string, data: Partial<Mestre>):Promise<Mestre|null>{
         return await prisma.mestre.update({where:{id}, data})
     }

@@ -30,6 +30,11 @@ class JogadorService {
             return jogadorRepository.getById(id);
         });
     }
+    geByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return jogadorRepository.getByEmail(email);
+        });
+    }
     update(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             return jogadorRepository.update(id, data);
@@ -38,6 +43,16 @@ class JogadorService {
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             yield jogadorRepository.delete(id);
+        });
+    }
+    login(usuario, senha) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const jogador = yield this.geByEmail(usuario);
+            if ((jogador === null || jogador === void 0 ? void 0 : jogador.senha) == senha && jogador.usuario == usuario) {
+                return true;
+            }
+            else
+                return false;
         });
     }
 }

@@ -1,12 +1,39 @@
-<div *ngIf="personagens ; else loadingTemplate">
+<body (click)="onClick($event)">
+  <div *ngIf="menu" [ngStyle]="{'top.px': menuPos.y, 'left.px': menuPos.x}" class="menu">
     <ul>
-      <li *ngFor="let personagem of personagens">
-        Nome: {{ personagem.nome }}
-      </li>
+      <li (click)="escolherOpcao('personagem')">Personagem</li>
+      <li (click)="escolherOpcao('monstro')">Monstro</li>
     </ul>
   </div>
-  
-  <!-- Template de carregamento -->
-  <ng-template #loadingTemplate>
-    <p>Carregando personagens...</p>
-  </ng-template>
+
+  <div *ngIf="monstroMenu" [ngStyle]="{'top.px': menuPos.y, 'left.px': menuPos.x}" class="menu">
+    <ul>
+      <li *ngFor="let monstro of monstros" (click)="get(monstro)">{{monstro.nome}}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="personagemMenu" [ngStyle]="{'top.px': menuPos.y, 'left.px': menuPos.x}" class="menu">
+    <ul>
+      <li *ngFor="let personagem of personagens" (click)="get(personagem)">{{personagem.nome}}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="miniaturas.length > 0" class="table_container">
+    <table mat-table [dataSource]="miniaturas">
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let minatura">{{minatura.nome}}</td>
+      </ng-container>
+      <ng-container matColumnDef="nivelFisico">
+        <th mat-header-cell *matHeaderCellDef>NIvel Físico</th>
+        <td mat-cell *matCellDef="let minatura">{{minatura.nivelFisico}}</td>
+      </ng-container>
+      <ng-container matColumnDef="nivelMental">
+        <th mat-header-cell *matHeaderCellDef>Nivel Mental</th>
+        <td mat-cell *matCellDef="let minatura">{{minatura.nivelMental}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="teste"></tr>
+    </table>
+  </div>
+</body>

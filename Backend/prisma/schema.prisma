@@ -31,14 +31,14 @@ model Mesa {
   id        String          @id @default(uuid())
   Mestre    Mestre?         @relation(fields: [mestreId], references: [id])
   mestreId  String?
-  jogadores JogadoresMesa[]
+  PersonagensId String[]
+  MonstrosId String[]
 
   @@map("mesa")
 }
 
 model jogador {
   id          String          @id @unique @default(uuid())
-  Mesa        JogadoresMesa[]
   usuario     String
   senha       String
   personagens personagem[]
@@ -46,15 +46,6 @@ model jogador {
   @@map("jogador")
 }
 
-model JogadoresMesa {
-  jogadorId String  @map("jogadorId")
-  mesaId    String  @map("MesaId")
-  jogador   jogador @relation(fields: [jogadorId], references: [id])
-  mesa      Mesa    @relation(fields: [mesaId], references: [id])
-
-  @@id([jogadorId, mesaId])
-  @@map("jogadores_mesa")
-}
 
 model personagem {
   id          String                 @id @unique @default(uuid())
@@ -67,6 +58,7 @@ model personagem {
   vida        Int
   estresse    Int
   historia    String
+  habilidadesID String[]
 
   @@map("personagem")
 }

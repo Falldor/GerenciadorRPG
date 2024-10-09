@@ -8,7 +8,7 @@ const router = (0, express_1.Router)();
 const personagemController = new PersonagemController_1.PersonagemController();
 const validaPersonagem = new personagem_validacao_1.validacaoPersonagem();
 router.post('/create/:jogadorId', autenticacao_1.authenticateTokenMiddleware, validaPersonagem.validaCriar, personagemController.create);
-router.get('/getAllgetAllPersonagens/:jogadorId', autenticacao_1.authenticateTokenMiddleware, validaPersonagem.validaIdJogador, personagemController.getAllPersonagensIdJogador);
+router.get('/getAllPersonagens/:jogadorId', autenticacao_1.authenticateTokenMiddleware, validaPersonagem.validaIdJogador, personagemController.getAllPersonagensIdJogador);
 router.get('/getAllPersonagens/', autenticacao_1.authenticateTokenMiddleware, personagemController.getAllPersonagens);
 router.get('/getById/:id', autenticacao_1.authenticateTokenMiddleware, validaPersonagem.validaId, personagemController.getById);
 router.put('/edit/:id', autenticacao_1.authenticateTokenMiddleware, validaPersonagem.validaAtulizar, personagemController.update);

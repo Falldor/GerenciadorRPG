@@ -10,7 +10,7 @@ const validaPersonagem = new validacaoPersonagem()
 
 
 router.post('/create/:jogadorId', authenticateTokenMiddleware,validaPersonagem.validaCriar,personagemController.create)
-router.get('/getAllgetAllPersonagens/:jogadorId', authenticateTokenMiddleware,validaPersonagem.validaIdJogador,personagemController.getAllPersonagensIdJogador)
+router.get('/getAllPersonagens/:jogadorId', authenticateTokenMiddleware,validaPersonagem.validaIdJogador,personagemController.getAllPersonagensIdJogador)
 router.get('/getAllPersonagens/',authenticateTokenMiddleware,personagemController.getAllPersonagens)
 router.get('/getById/:id', authenticateTokenMiddleware,validaPersonagem.validaId,personagemController.getById)
 router.put('/edit/:id', authenticateTokenMiddleware,validaPersonagem.validaAtulizar,personagemController.update)

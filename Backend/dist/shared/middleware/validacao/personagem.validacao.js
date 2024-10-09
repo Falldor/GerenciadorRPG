@@ -44,7 +44,7 @@ class validacaoPersonagem {
         return next();
     }
     validaIdJogador(req, res, next) {
-        const idJogador = req.body;
+        const idJogador = req.params.jogadorId;
         if (idJogador) {
             if (typeof idJogador !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });

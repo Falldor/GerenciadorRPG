@@ -20,7 +20,7 @@ export class PersonagemService {
   constructor(private http: HttpClient) {   }
 
   create(form: FormGroup){
-    const jogadorId = "a97658c9-e76e-4a23-8bdc-d770b62417a3"
+    const jogadorId = "02046963-cbf3-45cb-a3e9-1bb432322829"
     const formData = form.value
     this.http.post(`${this.apiUrl}/personagem/create/${jogadorId}`,formData, {headers}).subscribe((res) => {console.log(res)})
   }

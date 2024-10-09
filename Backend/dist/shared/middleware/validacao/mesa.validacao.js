@@ -27,7 +27,7 @@ class validacaoMesa {
         return next();
     }
     validaIdMestre(req, res, next) {
-        const { mestreId } = req.body;
+        const { mestreId } = req.params;
         if (mestreId) {
             if (typeof mestreId !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });

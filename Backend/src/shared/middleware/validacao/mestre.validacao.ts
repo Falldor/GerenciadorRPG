@@ -24,7 +24,7 @@ export class validacaoMestre {
     }
 
     validaPegaPorId(req: Request, res: Response, next:NextFunction) {
-        const id = req.body;
+        const id = req.params.id;
         
         if(id){
             if(typeof(id)!== 'string'){
@@ -36,7 +36,8 @@ export class validacaoMestre {
     }
 
     validaAtualizar(req: Request, res: Response, next:NextFunction) {
-        const { id, usuario, senha } = req.body;
+        const id = req.params.id
+        const { usuario, senha } = req.body;
 
         if(id){
             if(typeof(id)!== 'string'){
@@ -61,7 +62,7 @@ export class validacaoMestre {
     }
 
     validaDeletar(req: Request, res: Response, next:NextFunction) {
-        const id = req.body;
+        const id = req.params.id;
 
         if(id){
             if(typeof(id)!== 'string'){
@@ -70,5 +71,7 @@ export class validacaoMestre {
         }else{
             return  res.status(400).json({message:"O campo id é obrigatorio"})
         }
+
+        return next()
     }
 }

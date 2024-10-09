@@ -23,7 +23,7 @@ class validacaoMestre {
         return next();
     }
     validaPegaPorId(req, res, next) {
-        const id = req.body;
+        const id = req.params.id;
         if (id) {
             if (typeof (id) !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id valido" });
@@ -34,7 +34,8 @@ class validacaoMestre {
         }
     }
     validaAtualizar(req, res, next) {
-        const { id, usuario, senha } = req.body;
+        const id = req.params.id;
+        const { usuario, senha } = req.body;
         if (id) {
             if (typeof (id) !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id valido" });
@@ -56,7 +57,7 @@ class validacaoMestre {
         return next();
     }
     validaDeletar(req, res, next) {
-        const id = req.body;
+        const id = req.params.id;
         if (id) {
             if (typeof (id) !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id valido" });
@@ -65,6 +66,7 @@ class validacaoMestre {
         else {
             return res.status(400).json({ message: "O campo id é obrigatorio" });
         }
+        return next();
     }
 }
 exports.validacaoMestre = validacaoMestre;

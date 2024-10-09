@@ -2,7 +2,7 @@
     <div class="button_container">
         <button mat-flat-button (click)="openAddDialog()">Criar monstro</button>
     </div>
-    <table mat-table [dataSource]="monstros">
+    <table mat-table [dataSource]="monstros" *ngIf="monstros.length > 0">
         <ng-container matColumnDef="nome">
             <th mat-header-cell *matHeaderCellDef>Nome</th>
             <td mat-cell *matCellDef="let monstro">{{monstro.nome}}</td>

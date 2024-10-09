@@ -21,23 +21,29 @@ export class MonstrosComponent implements OnInit {
   readonly dialog = inject(MatDialog)
 
   displayedColumns:string[] = ['nome', 'nivelFisico', 'nivelMental']
-  monstros: monstro[] = []
+  monstros: monstro[] | undefined = []
 
   constructor(private monstroService: MonstroService) { }
 
   async ngOnInit(): Promise<void> {
-    await this.getAll();
-    console.log(this.monstros)
+    this.monstros = await this.getAll();
+    console.log(this.monstros?.length)
   }
 
   openAddDialog() {
     const dialogRef = this.dialog.open(ModalCreateComponent, { height: '75%', width: '95%', data: {tipo:'monstro'} });
-    dialogRef.afterClosed().subscribe(() => {window.location.reload()})
+    dialogRef.afterClosed().subscribe(async () => {this.monstros = await this.getAll()})
   }
 
-  async getAll() {
+  async getAll(): Promise<any>{
     try {
-      this.monstros = await firstValueFrom(this.monstroService.getAll())
+      const resultado = await firstValueFrom(this.monstroService.getAll())
+      if(resultado != undefined){
+        return resultado
+      }else{
+        return []
+      }
+      
     } catch (error) {
       console.log(error)
     }

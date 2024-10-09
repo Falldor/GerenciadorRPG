@@ -17,24 +17,6 @@
        
         
     </div>
-    <div class="habilidade">
-        <button mat-flat-button (click)="openHabilidadeDialog()">Criar Habilidade</button>
-        <div class="modal-containers">
-            <div *ngIf="habilidadesMentais">
-                <ul>Habilidades Mentais
-                    <li *ngFor="let habilidadeMental of habilidadesMentais">
-                        Nome: {{habilidadeMental.nome}}
-                    </li>
-                </ul>
-            </div>
-            <div *ngIf="habilidadesFisicas">
-                <ul>Habilidades Fisicas
-                    <li *ngFor="let habilidadeFisica of habilidadesFisicas">
-                        Nome: {{habilidadeFisica.nome}}
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    
     <button mat-flat-button type="submit" (click)="onSubmit()">Add {{data.tipo}} </button>
 </div>

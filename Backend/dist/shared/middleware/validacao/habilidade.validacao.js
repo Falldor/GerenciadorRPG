@@ -31,7 +31,7 @@ class validacaoHabilidade {
         return next();
     }
     validaId(req, res, next) {
-        const id = req.body;
+        const id = req.params.id;
         if (id) {
             if (typeof id !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });
@@ -43,7 +43,8 @@ class validacaoHabilidade {
         return next();
     }
     validaAtualizar(req, res, next) {
-        const { id, nome, tipo, descricao } = req.body;
+        const id = req.params.id;
+        const { nome, tipo, descricao } = req.body;
         if (id) {
             if (typeof id !== 'string') {
                 return res.status(400).json({ message: "O campo id deve ser uma string, insira um id válido" });

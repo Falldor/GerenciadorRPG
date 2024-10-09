@@ -1,39 +1,39 @@
 <div class="container">
     <form [formGroup]="formulario" >
-        <p>Insira as informações do personagem</p>
+        <p>Insira as informações do monstro</p>
         <mat-form-field>
             <mat-label>Nome</mat-label>
-            <input matInput type="text" id="nome" formControlName="nome" placeholder="Digite o nome do personagem">
+            <input matInput type="text" id="nome" formControlName="nome" placeholder="Digite o nome do monstro">
         </mat-form-field>
         
         <mat-form-field>
             <mat-label>Nivel Físico</mat-label>
-            <input matInput type="number" id="nivelFisico" formControlName="nivelFisico" placeholder="Digite o nome do personagem">
+            <input matInput type="number" id="nivelFisico" formControlName="nivelFisico" placeholder="Digite o nome do monstro">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Nivel Mental</mat-label>
-            <input matInput type="number" id="nivelMental" formControlName="nivelMental" placeholder="Digite o nome do personagem">
+            <input matInput type="number" id="nivelMental" formControlName="nivelMental" placeholder="Digite o nome do monstro">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Vida</mat-label>
-            <input matInput type="number" id="vida" formControlName="vida" placeholder="Digite o nome do personagem">
+            <input matInput type="number" id="vida" formControlName="vida" placeholder="Digite o nome do monstro">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Estresse</mat-label>
-            <input matInput type="number" id="estresse" formControlName="estresse" placeholder="Digite o nome do personagem">
+            <input matInput type="number" id="estresse" formControlName="estresse" placeholder="Digite o nome do monstro">
         </mat-form-field>
         <mat-form-field>
             <mat-label>XP</mat-label>
-            <input matInput type="number" id="xp" formControlName="xp" placeholder="Digite o nome do personagem">
+            <input matInput type="number" id="xp" formControlName="xp" placeholder="Digite o nome do monstro">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Historia</mat-label>
-            <textarea matInput type="text" id="historia" formControlName="historia" placeholder="escreva a historia do personagem"></textarea>
+            <textarea matInput type="text" id="historia" formControlName="historia" placeholder="escreva a historia do monstro"></textarea>
         </mat-form-field>
     </form>
     <div class="button-container">
-        <button mat-flat-button (click)="deletaPersonagem()">Deletar personagem</button>
-        <button mat-flat-button (click)="editaPersonagem()">Atualizar personagem</button>
+        <button mat-flat-button (click)="deletaMonstro()">Deletar monstro</button>
+        <button mat-flat-button (click)="editaMonstro()">Atualizar monstro</button>
     </div>
     
 </div>

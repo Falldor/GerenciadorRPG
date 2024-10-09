@@ -40,8 +40,8 @@ export class ModalCreateComponent implements OnInit {
     private router: Router,
     private monstroService: MonstroService,
     private habilidadeService:HabilidadeService ,
-    private dialogAtual: MatDialogRef<ModalCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data:{tipo:string},
+    private dialogAtual: MatDialogRef<ModalCreateComponent>,
     private personagemService: PersonagemService
   ) {
     this.formulario = new FormGroup({

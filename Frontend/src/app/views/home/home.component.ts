@@ -96,7 +96,6 @@ export class HomeComponent implements OnInit{
 
 
   onClick(event: MouseEvent){
-    
     const target = event.target as HTMLElement
     if(this.monstroMenu == false && this.personagemMenu == false && target.tagName != "LI" && this.menu == false){
       this.menu = true

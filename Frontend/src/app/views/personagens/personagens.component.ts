@@ -7,7 +7,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { NgFor, NgIf } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
-import { EditComponent } from '../../shared/modais/edit/edit.component';
+import { EditPersonagemComponent } from '../../shared/modais/edit-personagem/edit-personagem.component';
 
 
 
@@ -50,7 +50,7 @@ export class PersonagensComponent implements OnInit {
   }
 
   openEditDialog(personagem: personagem){
-    const dialogRef = this.dialog.open(EditComponent,{data: {personagem}})
+    const dialogRef = this.dialog.open(EditPersonagemComponent,{data: {personagem}})
     dialogRef.afterClosed().subscribe(async () => {this.personagens = await this.getAllPersonagens()})
   }
 }

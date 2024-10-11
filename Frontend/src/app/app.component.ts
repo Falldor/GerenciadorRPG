@@ -1,3 +1,4 @@
+//Sua função é somente a navageção entre as telas
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterOutlet } from '@angular/router';

@@ -1,3 +1,7 @@
+/*
+Esse componete é responsavel por pegar a informações do personagem através do seu ID e exibir todos os atributos de monstro no formulario, alem de poder editar esses atributos 
+ou então deletar o personagem.
+*/
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { personagem } from '../../../Interfaces/personagem.interface';

@@ -1,3 +1,7 @@
+/*
+Personagens tem a função de exibir os Personagens criados, que podem ser editados ou delatados atréves do clique que chama o componete de edição de personagens
+além de tambem chamar o componete de criação de personagens
+*/
 import { ModalCreateComponent } from '../../shared/modais/modal-create/modal-create.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PersonagemService } from '../../services/personagem.service';

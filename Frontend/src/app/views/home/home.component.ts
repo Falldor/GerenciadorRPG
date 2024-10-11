@@ -1,4 +1,4 @@
-
+//Home tem a função de exibir os monstros e personagens que podem ser adicionados na mesa clicando com o botão esquerdo do mouse.
 import { PersonagemService } from '../../services/personagem.service';
 import { personagem } from '../../Interfaces/personagem.interface';
 import { CommonModule, NgFor, NgIf} from '@angular/common';

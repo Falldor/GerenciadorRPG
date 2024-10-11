@@ -1,8 +1,10 @@
+/*
+Esse componete é responsavel por receber a informações do personagem ou monstro já que ambos tem praticamente os mesmos atributos atraves do formulario e fazer a requisição para
+salvar ele(a).
+*/
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ModalHabilidadeComponent } from '../modal-habilidade/modal-habilidade.component';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PersonagemService } from '../../../services/personagem.service';
-import { HabilidadeService } from '../../../services/habilidade.service';
 import { habilidade } from '../../../Interfaces/habilidade.interface';
 import { MonstroService } from '../../../services/monstro.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { NgIf,NgFor } from '@angular/common';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+
 
 
 
@@ -20,18 +22,16 @@ import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'app-modal-create',
   standalone: true,
-  imports: [NgIf, NgFor,MatButton, MatIconModule, MatDialogModule, ModalHabilidadeComponent, MatInputModule, MatFormFieldModule, ReactiveFormsModule],
+  imports: [NgIf, NgFor,MatButton, MatIconModule, MatDialogModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule],
   templateUrl: './modal-create.component.html',
   styleUrl: './modal-create.component.css',
-  providers: [MonstroService, HabilidadeService, PersonagemService]
+  providers: [MonstroService, PersonagemService]
 })
 export class ModalCreateComponent implements OnInit {
   formulario: FormGroup
   habilidadesMentais:habilidade[] = [] 
   habilidadesFisicas:habilidade[] = [] 
   async ngOnInit(): Promise<void> {
-    this.habilidadesFisicas = await this.getAllTipo("fisico")
-    this.habilidadesMentais = await this.getAllTipo("mental")
     console.log(this.habilidadesFisicas)
     console.log(this.habilidadesMentais)
   }
@@ -39,7 +39,6 @@ export class ModalCreateComponent implements OnInit {
   constructor(
     private router: Router,
     private monstroService: MonstroService,
-    private habilidadeService:HabilidadeService ,
     @Inject(MAT_DIALOG_DATA) public data:{tipo:string},
     private dialogAtual: MatDialogRef<ModalCreateComponent>,
     private personagemService: PersonagemService
@@ -51,13 +50,6 @@ export class ModalCreateComponent implements OnInit {
   }
   readonly dialog = inject(MatDialog)
 
-  openHabilidadeDialog() {
-    const dialogRef = this.dialog.open(ModalHabilidadeComponent, {width: '400px', position: { right: '0px' }})
-    dialogRef.afterClosed().subscribe(async() => {
-      this.habilidadesFisicas = await this.getAllTipo("fisico")
-      this.habilidadesMentais = await this.getAllTipo("mental")
-    })
-  }
 
   onSubmit() {
     if(this.router.url == "/monstros"){
@@ -66,9 +58,5 @@ export class ModalCreateComponent implements OnInit {
       this.personagemService.create(this.formulario)
     }
     this.dialogAtual.close()
-  }
-
-  async getAllTipo(tipo:string){
-    return await firstValueFrom(this.habilidadeService.getAllTipo(tipo))
   }
 }

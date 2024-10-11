@@ -1,3 +1,7 @@
+/*
+Esse componete é responsavel por pegar a informações do monstro através do seu ID e exibir todos os atributos de monstro no formulario, alem de poder editar esses atributos 
+ou então deletar o monstro.
+*/
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';

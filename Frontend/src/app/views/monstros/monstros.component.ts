@@ -1,3 +1,8 @@
+/*
+Monstros tem a função de exibir os monstros criados, que podem ser editados ou delatados atréves do clique que chama o componete de edição de monstro
+além de tambem chamar o componete de criação de monstros
+*/
+
 import { ModalCreateComponent } from '../../shared/modais/modal-create/modal-create.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MonstroService } from '../../services/monstro.service';
